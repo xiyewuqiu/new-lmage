@@ -1,4 +1,15 @@
 import { motion } from 'framer-motion';
+import {
+  HiOutlineCloudUpload,
+  HiOutlinePhotograph,
+  HiOutlineStar,
+  HiOutlineTag,
+  HiOutlineShieldCheck,
+  HiOutlineDeviceMobile,
+  HiOutlineQuestionMarkCircle,
+  HiOutlineSupport,
+} from 'react-icons/hi';
+import { FiGithub, FiMail } from 'react-icons/fi';
 import './Help.css';
 
 /**
@@ -49,32 +60,32 @@ const HelpPage = () => {
 
   const features = [
     {
-      icon: 'ri-upload-cloud-2-line',
+      Icon: HiOutlineCloudUpload,
       title: '快速上传',
       description: '支持拖拽、点击和粘贴三种上传方式',
     },
     {
-      icon: 'ri-image-2-line',
+      Icon: HiOutlinePhotograph,
       title: '图片管理',
       description: '完整的图片管理功能，支持搜索、筛选和排序',
     },
     {
-      icon: 'ri-star-line',
+      Icon: HiOutlineStar,
       title: '收藏功能',
       description: '标记重要图片，快速访问常用资源',
     },
     {
-      icon: 'ri-price-tag-3-line',
+      Icon: HiOutlineTag,
       title: '标签系统',
       description: '使用标签分类管理，提高组织效率',
     },
     {
-      icon: 'ri-shield-check-line',
+      Icon: HiOutlineShieldCheck,
       title: '安全可靠',
       description: '基于 Telegram 存储，数据安全有保障',
     },
     {
-      icon: 'ri-smartphone-line',
+      Icon: HiOutlineDeviceMobile,
       title: '响应式设计',
       description: '完美适配各种设备，随时随地访问',
     },
@@ -108,7 +119,7 @@ const HelpPage = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
               <div className="feature-icon">
-                <i className={feature.icon}></i>
+                <feature.Icon />
               </div>
               <h3 className="feature-title">{feature.title}</h3>
               <p className="feature-description">{feature.description}</p>
@@ -130,7 +141,7 @@ const HelpPage = () => {
               transition={{ delay: index * 0.05, duration: 0.5 }}
             >
               <h3 className="faq-question">
-                <i className="ri-question-line"></i>
+                <HiOutlineQuestionMarkCircle />
                 {faq.question}
               </h3>
               <p className="faq-answer">{faq.answer}</p>
@@ -143,7 +154,7 @@ const HelpPage = () => {
       <section className="help-section">
         <div className="contact-card">
           <div className="contact-icon">
-            <i className="ri-customer-service-2-line"></i>
+            <HiOutlineSupport />
           </div>
           <h2 className="contact-title">需要更多帮助？</h2>
           <p className="contact-description">
@@ -156,14 +167,14 @@ const HelpPage = () => {
               rel="noopener noreferrer"
               className="btn btn-primary"
             >
-              <i className="ri-github-line"></i>
+              <FiGithub />
               GitHub Issues
             </a>
             <a
               href="mailto:support@tg-image.com"
               className="btn btn-secondary"
             >
-              <i className="ri-mail-line"></i>
+              <FiMail />
               发送邮件
             </a>
           </div>

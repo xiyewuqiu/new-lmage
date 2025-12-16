@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { HiX } from 'react-icons/hi';
 import './Modal.css';
 
 /**
@@ -69,7 +70,7 @@ const Modal = ({
                     onClick={onClose}
                     aria-label="关闭"
                   >
-                    <i className="ri-close-line"></i>
+                    <HiX />
                   </button>
                 )}
               </div>

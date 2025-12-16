@@ -4,6 +4,19 @@ import { useThemeStore } from '@/store/themeStore';
 import { useAuthStore } from '@/store/authStore';
 import { validatePassword } from '@/utils/validation';
 import toast from 'react-hot-toast';
+import {
+  HiOutlineCog,
+  HiOutlineColorSwatch,
+  HiOutlineSun,
+  HiOutlineMoon,
+  HiOutlineBell,
+  HiOutlineCloudUpload,
+  HiOutlineShieldCheck,
+  HiOutlineLockClosed,
+  HiOutlineExclamation,
+  HiOutlineTrash,
+  HiOutlineCheck,
+} from 'react-icons/hi';
 import './Settings.css';
 
 /**
@@ -126,7 +139,7 @@ const SettingsPage = () => {
       {/* 页面头部 */}
       <div className="settings-header">
         <h1 className="page-title">
-          <i className="ri-settings-3-line"></i>
+          <HiOutlineCog />
           设置
         </h1>
         <p className="page-subtitle">管理您的偏好设置和账户安全</p>
@@ -137,7 +150,7 @@ const SettingsPage = () => {
         {/* 外观设置 */}
         <section className="settings-section">
           <h2 className="section-title">
-            <i className="ri-palette-line"></i>
+            <HiOutlineColorSwatch />
             外观设置
           </h2>
           <div className="setting-item">
@@ -150,14 +163,14 @@ const SettingsPage = () => {
                 className={`theme-option ${theme === 'light' ? 'active' : ''}`}
                 onClick={() => theme === 'dark' && toggleTheme()}
               >
-                <i className="ri-sun-line"></i>
+                <HiOutlineSun />
                 浅色
               </button>
               <button
                 className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
                 onClick={() => theme === 'light' && toggleTheme()}
               >
-                <i className="ri-moon-line"></i>
+                <HiOutlineMoon />
                 深色
               </button>
             </div>
@@ -167,7 +180,7 @@ const SettingsPage = () => {
         {/* 通知设置 */}
         <section className="settings-section">
           <h2 className="section-title">
-            <i className="ri-notification-3-line"></i>
+            <HiOutlineBell />
             通知设置
           </h2>
           <div className="setting-item">
@@ -207,7 +220,7 @@ const SettingsPage = () => {
         {/* 上传设置 */}
         <section className="settings-section">
           <h2 className="section-title">
-            <i className="ri-upload-cloud-2-line"></i>
+            <HiOutlineCloudUpload />
             上传设置
           </h2>
           <div className="setting-item">
@@ -260,7 +273,7 @@ const SettingsPage = () => {
         {/* 安全设置 */}
         <section className="settings-section">
           <h2 className="section-title">
-            <i className="ri-shield-check-line"></i>
+            <HiOutlineShieldCheck />
             安全设置
           </h2>
           <div className="setting-item">
@@ -272,7 +285,7 @@ const SettingsPage = () => {
               className="btn btn-outline"
               onClick={() => setShowPasswordSection(!showPasswordSection)}
             >
-              <i className="ri-lock-password-line"></i>
+              <HiOutlineLockClosed />
               {showPasswordSection ? '取消' : '修改密码'}
             </button>
           </div>
@@ -350,7 +363,7 @@ const SettingsPage = () => {
                   </>
                 ) : (
                   <>
-                    <i className="ri-check-line"></i>
+                    <HiOutlineCheck />
                     确认修改
                   </>
                 )}
@@ -362,16 +375,16 @@ const SettingsPage = () => {
         {/* 危险区域 */}
         <section className="settings-section danger-section">
           <h2 className="section-title">
-            <i className="ri-error-warning-line"></i>
+            <HiOutlineExclamation />
             危险区域
           </h2>
           <div className="setting-item">
             <div className="setting-info">
               <h3>注销账户</h3>
-              <p>永久删除您的账户和所有数据</p>
+              <p>永久删除您的账户��所有数据</p>
             </div>
             <button className="btn btn-danger" onClick={handleDeleteAccount}>
-              <i className="ri-delete-bin-line"></i>
+              <HiOutlineTrash />
               注销账户
             </button>
           </div>

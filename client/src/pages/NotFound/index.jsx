@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { HiOutlineExclamation, HiOutlineHome, HiOutlineArrowLeft } from 'react-icons/hi';
 import './NotFound.css';
 
 /**
@@ -21,7 +22,7 @@ const NotFoundPage = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <i className="ri-error-warning-line"></i>
+          <HiOutlineExclamation />
         </motion.div>
 
         {/* 404 文字 */}
@@ -60,14 +61,14 @@ const NotFoundPage = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
         >
           <Link to="/" className="btn btn-primary">
-            <i className="ri-home-5-line"></i>
+            <HiOutlineHome />
             返回首页
           </Link>
           <button
             className="btn btn-secondary"
             onClick={() => window.history.back()}
           >
-            <i className="ri-arrow-left-line"></i>
+            <HiOutlineArrowLeft />
             返回上一页
           </button>
         </motion.div>

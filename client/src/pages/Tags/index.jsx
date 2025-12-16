@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTagStore } from '@/store/tagStore';
 import toast from 'react-hot-toast';
+import {
+  HiOutlineTag,
+  HiOutlinePlus,
+  HiOutlinePencil,
+  HiOutlineTrash,
+  HiOutlineCheck,
+} from 'react-icons/hi';
 import './Tags.css';
 
 /**
@@ -91,7 +98,7 @@ const TagsPage = () => {
       <div className="tags-header">
         <div className="header-left">
           <h1 className="page-title">
-            <i className="ri-price-tag-3-line"></i>
+            <HiOutlineTag />
             标签管理
           </h1>
           <p className="page-subtitle">共 {tags.length} 个标签</p>
@@ -101,7 +108,7 @@ const TagsPage = () => {
             className="btn btn-primary"
             onClick={() => setShowCreateModal(true)}
           >
-            <i className="ri-add-line"></i>
+            <HiOutlinePlus />
             创建标签
           </button>
         </div>
@@ -115,14 +122,14 @@ const TagsPage = () => {
         </div>
       ) : tags.length === 0 ? (
         <div className="empty-state">
-          <i className="ri-price-tag-3-line"></i>
+          <HiOutlineTag className="empty-icon" />
           <h3>还没有标签</h3>
           <p>创建标签来更好地组织您的图片</p>
           <button
             className="btn btn-primary"
             onClick={() => setShowCreateModal(true)}
           >
-            <i className="ri-add-line"></i>
+            <HiOutlinePlus />
             创建第一个标签
           </button>
         </div>
@@ -147,14 +154,14 @@ const TagsPage = () => {
                   onClick={() => handleEdit(tag)}
                   title="编辑"
                 >
-                  <i className="ri-edit-line"></i>
+                  <HiOutlinePencil />
                 </button>
                 <button
                   className="tag-action-btn danger"
                   onClick={() => handleDelete(tag.id)}
                   title="删除"
                 >
-                  <i className="ri-delete-bin-line"></i>
+                  <HiOutlineTrash />
                 </button>
               </div>
             </motion.div>
@@ -173,7 +180,7 @@ const TagsPage = () => {
           >
             <div className="modal-header">
               <h3>
-                <i className="ri-add-line"></i>
+                <HiOutlinePlus />
                 创建标签
               </h3>
             </div>
@@ -209,7 +216,7 @@ const TagsPage = () => {
                   取消
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  <i className="ri-check-line"></i>
+                  <HiOutlineCheck />
                   创建
                 </button>
               </div>
@@ -229,7 +236,7 @@ const TagsPage = () => {
           >
             <div className="modal-header">
               <h3>
-                <i className="ri-edit-line"></i>
+                <HiOutlinePencil />
                 编辑标签
               </h3>
             </div>
@@ -265,7 +272,7 @@ const TagsPage = () => {
                   取消
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  <i className="ri-check-line"></i>
+                  <HiOutlineCheck />
                   保存
                 </button>
               </div>

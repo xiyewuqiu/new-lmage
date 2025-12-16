@@ -66,9 +66,13 @@ body.dark-mode .dropzone {
 }
 
 .dropzone-icon {
-  font-size: 64px;
   color: var(--primary-color);
   margin-bottom: var(--spacing);
+}
+
+.dropzone-icon svg {
+  width: 64px;
+  height: 64px;
 }
 
 .dropzone-text {
@@ -102,8 +106,9 @@ body.dark-mode .dropzone-hint {
   gap: var(--spacing-xs);
 }
 
-.dropzone-hint-item i {
-  font-size: 18px;
+.dropzone-hint-item svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* 上传进度 */
@@ -168,8 +173,9 @@ body.dark-mode .upload-result {
   gap: var(--spacing-sm);
 }
 
-.result-header h3 i {
-  font-size: 32px;
+.result-header h3 svg {
+  width: 32px;
+  height: 32px;
 }
 
 .result-subtitle {
@@ -222,8 +228,9 @@ body.dark-mode .link-item label {
   color: var(--dark-text);
 }
 
-.link-item label i {
-  font-size: 16px;
+.link-item label svg {
+  width: 16px;
+  height: 16px;
 }
 
 .copy-container {
@@ -257,8 +264,9 @@ body.dark-mode .link-item label {
     padding: var(--spacing-xl);
   }
 
-  .dropzone-icon {
-    font-size: 48px;
+  .dropzone-icon svg {
+    width: 48px;
+    height: 48px;
   }
 
   .dropzone-text {

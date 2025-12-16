@@ -37,9 +37,11 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.section-title i {
-  font-size: 1.5rem;
+.section-title svg {
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--primary-color);
+  flex-shrink: 0;
 }
 
 /* ========== 设置项 ========== */
@@ -106,8 +108,9 @@
   color: white;
 }
 
-.theme-option i {
-  font-size: 1.2rem;
+.theme-option svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 /* ========== 开关按钮 ========== */
@@ -204,7 +207,7 @@
   color: var(--danger-color);
 }
 
-.danger-section .section-title i {
+.danger-section .section-title svg {
   color: var(--danger-color);
 }
 

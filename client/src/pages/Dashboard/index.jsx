@@ -6,6 +6,21 @@ import { useFavoriteStore } from '@/store/favoriteStore';
 import { useAuthStore } from '@/store/authStore';
 import { formatFileSize, formatDate } from '@/utils/format';
 import toast from 'react-hot-toast';
+import {
+  HiOutlinePhotograph,
+  HiOutlineCloudUpload,
+  HiOutlineViewGrid,
+  HiOutlineViewList,
+  HiOutlineCheckCircle,
+  HiCheckCircle,
+  HiOutlineTrash,
+  HiOutlineLink,
+  HiOutlineHeart,
+  HiHeart,
+  HiOutlineDocument,
+  HiOutlineClock,
+  HiOutlineCollection,
+} from 'react-icons/hi';
 import './Dashboard.css';
 
 /**
@@ -99,7 +114,7 @@ const DashboardPage = () => {
       <div className="dashboard-header">
         <div className="header-left">
           <h1 className="page-title">
-            <i className="ri-dashboard-line"></i>
+            <HiOutlinePhotograph />
             我的图片
           </h1>
           <p className="page-subtitle">
@@ -113,7 +128,7 @@ const DashboardPage = () => {
             className="btn btn-outline"
             onClick={() => navigate('/')}
           >
-            <i className="ri-upload-2-line"></i>
+            <HiOutlineCloudUpload />
             上传图片
           </button>
         </div>
@@ -129,14 +144,14 @@ const DashboardPage = () => {
               onClick={() => setViewMode('grid')}
               title="网格视图"
             >
-              <i className="ri-grid-line"></i>
+              <HiOutlineViewGrid />
             </button>
             <button
               className={`view-btn ${filters.viewMode === 'list' ? 'active' : ''}`}
               onClick={() => setViewMode('list')}
               title="列表视图"
             >
-              <i className="ri-list-check"></i>
+              <HiOutlineViewList />
             </button>
           </div>
 
@@ -159,7 +174,7 @@ const DashboardPage = () => {
           {isSelectionMode ? (
             <>
               <button className="btn btn-sm" onClick={toggleSelectAll}>
-                <i className="ri-checkbox-multiple-line"></i>
+                <HiOutlineCollection />
                 全选
               </button>
               <button
@@ -167,7 +182,7 @@ const DashboardPage = () => {
                 onClick={handleBatchDelete}
                 disabled={selectedImages.size === 0}
               >
-                <i className="ri-delete-bin-line"></i>
+                <HiOutlineTrash />
                 删除选中
               </button>
               <button
@@ -182,7 +197,7 @@ const DashboardPage = () => {
             </>
           ) : (
             <button className="btn btn-sm btn-outline" onClick={toggleSelectionMode}>
-              <i className="ri-checkbox-line"></i>
+              <HiOutlineCheckCircle />
               批量操作
             </button>
           )}
@@ -197,11 +212,11 @@ const DashboardPage = () => {
         </div>
       ) : images.length === 0 ? (
         <div className="empty-state">
-          <i className="ri-image-line"></i>
+          <HiOutlinePhotograph className="empty-icon" />
           <h3>还没有上传图片</h3>
           <p>点击上传按钮开始使用</p>
           <button className="btn btn-primary" onClick={() => navigate('/')}>
-            <i className="ri-upload-2-line"></i>
+            <HiOutlineCloudUpload />
             立即上传
           </button>
         </div>
@@ -223,13 +238,11 @@ const DashboardPage = () => {
                   className="selection-checkbox"
                   onClick={() => toggleImageSelection(image.id)}
                 >
-                  <i
-                    className={
-                      selectedImages.has(image.id)
-                        ? 'ri-checkbox-circle-fill'
-                        : 'ri-checkbox-blank-circle-line'
-                    }
-                  ></i>
+                  {selectedImages.has(image.id) ? (
+                    <HiCheckCircle />
+                  ) : (
+                    <HiOutlineCheckCircle />
+                  )}
                 </div>
               )}
 
@@ -242,27 +255,21 @@ const DashboardPage = () => {
                     onClick={() => copyImageUrl(image)}
                     title="复制链接"
                   >
-                    <i className="ri-link"></i>
+                    <HiOutlineLink />
                   </button>
                   <button
                     className="overlay-btn"
                     onClick={() => toggleFavorite(image.id)}
                     title={isFavorite(image.id) ? '取消收藏' : '收藏'}
                   >
-                    <i
-                      className={
-                        isFavorite(image.id)
-                          ? 'ri-heart-fill'
-                          : 'ri-heart-line'
-                      }
-                    ></i>
+                    {isFavorite(image.id) ? <HiHeart /> : <HiOutlineHeart />}
                   </button>
                   <button
                     className="overlay-btn danger"
                     onClick={() => handleDeleteClick(image)}
                     title="删除"
                   >
-                    <i className="ri-delete-bin-line"></i>
+                    <HiOutlineTrash />
                   </button>
                 </div>
               </div>
@@ -274,11 +281,11 @@ const DashboardPage = () => {
                 </p>
                 <div className="image-meta">
                   <span>
-                    <i className="ri-file-line"></i>
+                    <HiOutlineDocument />
                     {formatFileSize(image.fileSize)}
                   </span>
                   <span>
-                    <i className="ri-time-line"></i>
+                    <HiOutlineClock />
                     {formatDate(image.uploadTime)}
                   </span>
                 </div>
@@ -299,7 +306,7 @@ const DashboardPage = () => {
           >
             <div className="modal-header">
               <h3>
-                <i className="ri-delete-bin-line"></i>
+                <HiOutlineTrash />
                 确认删除
               </h3>
             </div>
@@ -320,7 +327,7 @@ const DashboardPage = () => {
                 取消
               </button>
               <button className="btn btn-danger" onClick={confirmDelete}>
-                <i className="ri-delete-bin-line"></i>
+                <HiOutlineTrash />
                 确认删除
               </button>
             </div>

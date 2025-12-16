@@ -91,7 +91,11 @@ body.dark-mode .feature-card {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 32px;
+}
+
+.feature-icon svg {
+  width: 32px;
+  height: 32px;
 }
 
 .feature-title {
@@ -152,9 +156,11 @@ body.dark-mode .faq-question {
   color: var(--dark-text);
 }
 
-.faq-question i {
+.faq-question svg {
   color: var(--primary-color);
-  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
 .faq-answer {
@@ -178,9 +184,13 @@ body.dark-mode .faq-answer {
 }
 
 .contact-icon {
-  font-size: 64px;
   margin-bottom: var(--spacing);
   opacity: 0.9;
+}
+
+.contact-icon svg {
+  width: 64px;
+  height: 64px;
 }
 
 .contact-title {

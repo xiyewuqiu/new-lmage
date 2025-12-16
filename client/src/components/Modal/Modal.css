@@ -64,8 +64,9 @@
   gap: 0.5rem;
 }
 
-.modal-title i {
-  font-size: 1.5rem;
+.modal-title svg {
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--primary-color);
 }
 
@@ -81,8 +82,12 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
-  font-size: 1.5rem;
   flex-shrink: 0;
+}
+
+.modal-close svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .modal-close:hover {

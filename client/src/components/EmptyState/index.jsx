@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { HiOutlineInbox } from 'react-icons/hi';
 import './EmptyState.css';
 
 /**
  * 空状态组件 - 用于显示无数据时的提示
  */
 const EmptyState = ({
-  icon = 'ri-inbox-line',
+  icon: Icon = HiOutlineInbox,
   title = '暂无数据',
   description = '',
   action,
@@ -26,7 +27,7 @@ const EmptyState = ({
         <div className="empty-illustration">{illustration}</div>
       ) : (
         <div className="empty-icon">
-          <i className={icon}></i>
+          {typeof Icon === 'function' ? <Icon /> : Icon}
         </div>
       )}
 
@@ -49,7 +50,7 @@ const EmptyState = ({
 };
 
 EmptyState.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   title: PropTypes.string,
   description: PropTypes.string,
   action: PropTypes.node,

@@ -41,8 +41,9 @@
   transform: scale(1.1);
 }
 
-.selection-checkbox i {
-  font-size: 1.5rem;
+.selection-checkbox svg {
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--primary-color);
 }
 
@@ -62,8 +63,9 @@
   box-shadow: var(--shadow-md);
 }
 
-.favorite-badge i {
-  font-size: 1.2rem;
+.favorite-badge svg {
+  width: 1.2rem;
+  height: 1.2rem;
   color: white;
 }
 
@@ -120,7 +122,11 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
-  font-size: 1.2rem;
+}
+
+.overlay-btn svg {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .overlay-btn:hover {
@@ -165,6 +171,12 @@
   gap: 0.25rem;
 }
 
+.image-meta svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 /* ========== 标签 ========== */
 .image-tags {
   display: flex;
@@ -200,6 +212,10 @@
   .overlay-btn {
     width: 36px;
     height: 36px;
-    font-size: 1.1rem;
+  }
+
+  .overlay-btn svg {
+    width: 1.1rem;
+    height: 1.1rem;
   }
 }

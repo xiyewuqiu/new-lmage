@@ -3,6 +3,16 @@ import { useDropzone } from 'react-dropzone';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { uploadFiles, validateFile } from '@/services/uploadService';
+import {
+  HiOutlineCloudUpload,
+  HiOutlinePhotograph,
+  HiOutlineDocumentDuplicate,
+  HiOutlineClipboard,
+  HiOutlineCheck,
+  HiOutlineLink,
+  HiOutlineCode,
+} from 'react-icons/hi';
+import { SiMarkdown } from 'react-icons/si';
 import './Home.css';
 
 /**
@@ -104,22 +114,22 @@ const HomePage = () => {
           >
             <input {...getInputProps()} />
             <div className="dropzone-icon">
-              <i className="ri-upload-cloud-2-line"></i>
+              <HiOutlineCloudUpload />
             </div>
             <p className="dropzone-text">
               {isDragActive ? '释放以上传文件' : '拖放图片到这里或点击选择'}
             </p>
             <div className="dropzone-hint">
               <span className="dropzone-hint-item">
-                <i className="ri-image-line"></i>
+                <HiOutlinePhotograph />
                 支持多种图片格式
               </span>
               <span className="dropzone-hint-item">
-                <i className="ri-file-copy-line"></i>
+                <HiOutlineDocumentDuplicate />
                 支持批量上传
               </span>
               <span className="dropzone-hint-item">
-                <i className="ri-clipboard-line"></i>
+                <HiOutlineClipboard />
                 支持 Ctrl+V 粘贴
               </span>
             </div>
@@ -149,7 +159,7 @@ const HomePage = () => {
           >
             <div className="result-header">
               <h3>
-                <i className="ri-check-line"></i>
+                <HiOutlineCheck />
                 上传成功！
               </h3>
               <p className="result-subtitle">
@@ -166,7 +176,7 @@ const HomePage = () => {
             <div className="link-group">
               <div className="link-item">
                 <label>
-                  <i className="ri-link"></i>
+                  <HiOutlineLink />
                   直接链接
                 </label>
                 <div className="copy-container">
@@ -182,7 +192,7 @@ const HomePage = () => {
                       copyToClipboard(window.location.origin + currentImage.src)
                     }
                   >
-                    <i className="ri-file-copy-line"></i>
+                    <HiOutlineDocumentDuplicate />
                     复制
                   </button>
                 </div>
@@ -190,7 +200,7 @@ const HomePage = () => {
 
               <div className="link-item">
                 <label>
-                  <i className="ri-code-s-slash-line"></i>
+                  <HiOutlineCode />
                   HTML 代码
                 </label>
                 <div className="copy-container">
@@ -208,7 +218,7 @@ const HomePage = () => {
                       )
                     }
                   >
-                    <i className="ri-file-copy-line"></i>
+                    <HiOutlineDocumentDuplicate />
                     复制
                   </button>
                 </div>
@@ -216,7 +226,7 @@ const HomePage = () => {
 
               <div className="link-item">
                 <label>
-                  <i className="ri-markdown-line"></i>
+                  <SiMarkdown />
                   Markdown 代码
                 </label>
                 <div className="copy-container">
@@ -234,7 +244,7 @@ const HomePage = () => {
                       )
                     }
                   >
-                    <i className="ri-file-copy-line"></i>
+                    <HiOutlineDocumentDuplicate />
                     复制
                   </button>
                 </div>
@@ -244,7 +254,7 @@ const HomePage = () => {
             {/* 操作按钮 */}
             <div className="result-actions">
               <button className="btn btn-primary" onClick={handleUploadAgain}>
-                <i className="ri-upload-2-line"></i>
+                <HiOutlineCloudUpload />
                 再次上传
               </button>
             </div>

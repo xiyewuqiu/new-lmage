@@ -1,6 +1,16 @@
 import { motion } from 'framer-motion';
 import { formatFileSize, formatDate } from '@/utils/format';
 import PropTypes from 'prop-types';
+import {
+  HiOutlineCheckCircle,
+  HiCheckCircle,
+  HiHeart,
+  HiOutlineHeart,
+  HiOutlineLink,
+  HiOutlineTrash,
+  HiOutlineDocument,
+  HiOutlineClock,
+} from 'react-icons/hi';
 import './ImageCard.css';
 
 /**
@@ -43,20 +53,14 @@ const ImageCard = ({
             onSelect?.(image.id);
           }}
         >
-          <i
-            className={
-              isSelected
-                ? 'ri-checkbox-circle-fill'
-                : 'ri-checkbox-blank-circle-line'
-            }
-          ></i>
+          {isSelected ? <HiCheckCircle /> : <HiOutlineCheckCircle />}
         </div>
       )}
 
       {/* 收藏标记 */}
       {isFavorite && !showSelection && (
         <div className="favorite-badge">
-          <i className="ri-heart-fill"></i>
+          <HiHeart />
         </div>
       )}
 
@@ -76,7 +80,7 @@ const ImageCard = ({
                 }}
                 title="复制链接"
               >
-                <i className="ri-link"></i>
+                <HiOutlineLink />
               </button>
             )}
             
@@ -89,7 +93,7 @@ const ImageCard = ({
                 }}
                 title={isFavorite ? '取消收藏' : '收藏'}
               >
-                <i className={isFavorite ? 'ri-heart-fill' : 'ri-heart-line'}></i>
+                {isFavorite ? <HiHeart /> : <HiOutlineHeart />}
               </button>
             )}
             
@@ -102,7 +106,7 @@ const ImageCard = ({
                 }}
                 title="删除"
               >
-                <i className="ri-delete-bin-line"></i>
+                <HiOutlineTrash />
               </button>
             )}
           </div>
@@ -116,11 +120,11 @@ const ImageCard = ({
         </p>
         <div className="image-meta">
           <span>
-            <i className="ri-file-line"></i>
+            <HiOutlineDocument />
             {formatFileSize(image.fileSize)}
           </span>
           <span>
-            <i className="ri-time-line"></i>
+            <HiOutlineClock />
             {formatDate(image.uploadTime)}
           </span>
         </div>

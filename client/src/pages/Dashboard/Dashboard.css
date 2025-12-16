@@ -28,8 +28,9 @@
   gap: 0.75rem;
 }
 
-.page-title i {
-  font-size: 2rem;
+.page-title svg {
+  width: 2rem;
+  height: 2rem;
   color: var(--primary-color);
 }
 
@@ -185,8 +186,9 @@
   transform: scale(1.1);
 }
 
-.selection-checkbox i {
-  font-size: 1.5rem;
+.selection-checkbox svg {
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--primary-color);
 }
 
@@ -290,8 +292,9 @@
   color: var(--text-secondary);
 }
 
-.empty-state i {
-  font-size: 5rem;
+.empty-state .empty-icon {
+  width: 5rem;
+  height: 5rem;
   color: var(--text-tertiary);
   margin-bottom: 1rem;
 }

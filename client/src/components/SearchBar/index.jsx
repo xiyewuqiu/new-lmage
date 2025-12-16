@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import {
+  HiOutlineSearch,
+  HiX,
+  HiOutlineArrowRight,
+  HiOutlineCalendar,
+  HiOutlineDocument,
+  HiOutlinePhotograph,
+} from 'react-icons/hi';
 import './SearchBar.css';
 
 /**
@@ -34,7 +42,7 @@ const SearchBar = ({
       transition={{ duration: 0.3 }}
     >
       <form onSubmit={handleSubmit} className={`search-bar ${isFocused ? 'focused' : ''}`}>
-        <i className="ri-search-line search-icon"></i>
+        <HiOutlineSearch className="search-icon" />
         <input
           type="text"
           className="search-input"
@@ -51,11 +59,11 @@ const SearchBar = ({
             onClick={handleClear}
             aria-label="清除"
           >
-            <i className="ri-close-line"></i>
+            <HiX />
           </button>
         )}
         <button type="submit" className="search-submit" aria-label="搜索">
-          <i className="ri-arrow-right-line"></i>
+          <HiOutlineArrowRight />
         </button>
       </form>
 
@@ -65,21 +73,21 @@ const SearchBar = ({
             className="filter-btn"
             onClick={() => onFilterChange?.('date')}
           >
-            <i className="ri-calendar-line"></i>
+            <HiOutlineCalendar />
             日期
           </button>
           <button
             className="filter-btn"
             onClick={() => onFilterChange?.('size')}
           >
-            <i className="ri-file-line"></i>
+            <HiOutlineDocument />
             大小
           </button>
           <button
             className="filter-btn"
             onClick={() => onFilterChange?.('type')}
           >
-            <i className="ri-image-line"></i>
+            <HiOutlinePhotograph />
             类型
           </button>
         </div>

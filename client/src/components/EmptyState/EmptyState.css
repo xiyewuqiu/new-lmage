@@ -21,8 +21,9 @@
   margin-bottom: 1.5rem;
 }
 
-.empty-icon i {
-  font-size: 4rem;
+.empty-icon svg {
+  width: 4rem;
+  height: 4rem;
   color: var(--text-tertiary);
 }
 
@@ -59,8 +60,9 @@
     height: 100px;
   }
 
-  .empty-icon i {
-    font-size: 3rem;
+  .empty-icon svg {
+    width: 3rem;
+    height: 3rem;
   }
 
   .empty-title {

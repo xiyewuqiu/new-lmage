@@ -21,20 +21,22 @@
   box-shadow: var(--shadow-colored-lg);
 }
 
-.scroll-to-top i {
-  font-size: 24px;
+.scroll-to-top svg {
+  width: 24px;
+  height: 24px;
 }
 
 /* 响应式 */
 @media (max-width: 768px) {
   .scroll-to-top {
-    bottom: var(--spacing-md);
+    bottom: calc(80px + var(--spacing-md));
     right: var(--spacing-md);
     width: 40px;
     height: 40px;
   }
 
-  .scroll-to-top i {
-    font-size: 20px;
+  .scroll-to-top svg {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -3,6 +3,16 @@ import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
 import { validateUsername, validateEmail } from '@/utils/validation';
 import toast from 'react-hot-toast';
+import {
+  HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineDocumentText,
+  HiOutlineCloudUpload,
+  HiOutlineCheck,
+  HiOutlinePencil,
+  HiOutlineInformationCircle,
+  HiCheckCircle,
+} from 'react-icons/hi';
 import './Profile.css';
 
 /**
@@ -98,7 +108,7 @@ const ProfilePage = () => {
       {/* 页面头部 */}
       <div className="profile-header">
         <h1 className="page-title">
-          <i className="ri-user-line"></i>
+          <HiOutlineUser />
           个人资料
         </h1>
         <p className="page-subtitle">管理您的账户信息</p>
@@ -113,13 +123,13 @@ const ProfilePage = () => {
               <img src={formData.avatar} alt="头像" className="avatar" />
             ) : (
               <div className="avatar-placeholder">
-                <i className="ri-user-line"></i>
+                <HiOutlineUser />
               </div>
             )}
           </div>
           {isEditing && (
             <button className="btn btn-sm btn-outline">
-              <i className="ri-upload-2-line"></i>
+              <HiOutlineCloudUpload />
               更换头像
             </button>
           )}
@@ -129,7 +139,7 @@ const ProfilePage = () => {
         <form onSubmit={handleSubmit} className="profile-form">
           <div className="form-group">
             <label htmlFor="username">
-              <i className="ri-user-line"></i>
+              <HiOutlineUser />
               用户名
             </label>
             <input
@@ -148,7 +158,7 @@ const ProfilePage = () => {
 
           <div className="form-group">
             <label htmlFor="email">
-              <i className="ri-mail-line"></i>
+              <HiOutlineMail />
               邮箱
             </label>
             <input
@@ -167,7 +177,7 @@ const ProfilePage = () => {
 
           <div className="form-group">
             <label htmlFor="bio">
-              <i className="ri-file-text-line"></i>
+              <HiOutlineDocumentText />
               个人简介
             </label>
             <textarea
@@ -206,7 +216,7 @@ const ProfilePage = () => {
                     </>
                   ) : (
                     <>
-                      <i className="ri-check-line"></i>
+                      <HiOutlineCheck />
                       保存更改
                     </>
                   )}
@@ -218,7 +228,7 @@ const ProfilePage = () => {
                 className="btn btn-primary"
                 onClick={() => setIsEditing(true)}
               >
-                <i className="ri-edit-line"></i>
+                <HiOutlinePencil />
                 编辑资料
               </button>
             )}
@@ -229,7 +239,7 @@ const ProfilePage = () => {
       {/* 账户信息 */}
       <div className="account-info">
         <h2 className="section-title">
-          <i className="ri-information-line"></i>
+          <HiOutlineInformationCircle />
           账户信息
         </h2>
         <div className="info-grid">
@@ -248,7 +258,7 @@ const ProfilePage = () => {
           <div className="info-item">
             <span className="info-label">账户状态</span>
             <span className="info-value status-active">
-              <i className="ri-checkbox-circle-fill"></i>
+              <HiCheckCircle />
               正常
             </span>
           </div>

@@ -3,6 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
 import { useThemeStore } from '@/store/themeStore';
+import {
+  HiOutlineCloudUpload,
+  HiOutlineSun,
+  HiOutlineMoon,
+  HiOutlineUser,
+  HiOutlinePhotograph,
+  HiOutlineStar,
+  HiOutlineCog,
+  HiOutlineLogout,
+  HiOutlineLogin,
+  HiChevronDown,
+} from 'react-icons/hi';
 import './Header.css';
 
 /**
@@ -38,7 +50,7 @@ const Header = () => {
             onClick={() => navigate('/')}
             title="上传图片"
           >
-            <i className="ri-upload-cloud-2-line"></i>
+            <HiOutlineCloudUpload />
             <span className="hide-mobile">上传</span>
           </button>
 
@@ -48,11 +60,7 @@ const Header = () => {
             onClick={toggleTheme}
             title={theme === 'dark' ? '切换到亮色模式' : '切换到暗色模式'}
           >
-            {theme === 'dark' ? (
-              <i className="ri-sun-line"></i>
-            ) : (
-              <i className="ri-moon-line"></i>
-            )}
+            {theme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
           </button>
 
           {/* 用户菜单 */}
@@ -66,11 +74,11 @@ const Header = () => {
                   {user?.avatarUrl ? (
                     <img src={user.avatarUrl} alt={user.username} />
                   ) : (
-                    <i className="ri-user-3-line"></i>
+                    <HiOutlineUser />
                   )}
                 </div>
                 <span className="hide-mobile">{user?.username}</span>
-                <i className="ri-arrow-down-s-line"></i>
+                <HiChevronDown className="chevron-icon" />
               </button>
 
               {/* 下拉菜单 */}
@@ -88,7 +96,7 @@ const Header = () => {
                       className="menu-item"
                       onClick={() => setShowUserMenu(false)}
                     >
-                      <i className="ri-image-2-line"></i>
+                      <HiOutlinePhotograph />
                       <span>我的图片</span>
                     </Link>
                     <Link
@@ -96,7 +104,7 @@ const Header = () => {
                       className="menu-item"
                       onClick={() => setShowUserMenu(false)}
                     >
-                      <i className="ri-star-line"></i>
+                      <HiOutlineStar />
                       <span>收藏</span>
                     </Link>
                     <Link
@@ -104,7 +112,7 @@ const Header = () => {
                       className="menu-item"
                       onClick={() => setShowUserMenu(false)}
                     >
-                      <i className="ri-user-settings-line"></i>
+                      <HiOutlineUser />
                       <span>个人资料</span>
                     </Link>
                     <Link
@@ -112,12 +120,12 @@ const Header = () => {
                       className="menu-item"
                       onClick={() => setShowUserMenu(false)}
                     >
-                      <i className="ri-settings-3-line"></i>
+                      <HiOutlineCog />
                       <span>设置</span>
                     </Link>
                     <div className="menu-divider"></div>
-                    <button className="menu-item" onClick={handleLogout}>
-                      <i className="ri-logout-box-line"></i>
+                    <button className="menu-item logout" onClick={handleLogout}>
+                      <HiOutlineLogout />
                       <span>退出登录</span>
                     </button>
                   </motion.div>
@@ -126,7 +134,7 @@ const Header = () => {
             </div>
           ) : (
             <Link to="/login" className="header-btn login-btn">
-              <i className="ri-login-box-line"></i>
+              <HiOutlineLogin />
               <span>登录</span>
             </Link>
           )}

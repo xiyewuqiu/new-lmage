@@ -16,10 +16,14 @@
 }
 
 .not-found-icon {
-  font-size: 120px;
   color: var(--primary-color);
   margin-bottom: var(--spacing-md);
   opacity: 0.8;
+}
+
+.not-found-icon svg {
+  width: 120px;
+  height: 120px;
 }
 
 .not-found-title {
@@ -96,8 +100,9 @@ body.dark-mode .not-found-description {
 
 /* 响应式 */
 @media (max-width: 768px) {
-  .not-found-icon {
-    font-size: 80px;
+  .not-found-icon svg {
+    width: 80px;
+    height: 80px;
   }
 
   .not-found-title {

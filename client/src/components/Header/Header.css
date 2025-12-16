@@ -74,12 +74,13 @@ body.dark-mode .header-btn:hover {
   color: var(--primary-light);
 }
 
-.header-btn i {
-  font-size: 20px;
+.header-btn svg {
+  width: 20px;
+  height: 20px;
   transition: transform var(--transition-fast);
 }
 
-.header-btn:hover i {
+.header-btn:hover svg {
   transform: scale(1.1);
 }
 
@@ -159,9 +160,20 @@ body.dark-mode .user-menu-btn:hover {
   object-fit: cover;
 }
 
-.user-avatar i {
+.user-avatar svg {
   color: white;
-  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.chevron-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.user-menu-btn:hover .chevron-icon {
+  transform: translateY(2px);
 }
 
 /* 下拉菜单 */
@@ -218,13 +230,26 @@ body.dark-mode .menu-item:hover {
   color: var(--primary-light);
 }
 
-.menu-item i {
-  font-size: 18px;
+.menu-item svg {
+  width: 18px;
+  height: 18px;
   transition: transform var(--transition-fast);
+  flex-shrink: 0;
 }
 
-.menu-item:hover i {
+.menu-item:hover svg {
   transform: scale(1.1);
+}
+
+/* 退出登录按钮特殊样式 */
+.menu-item.logout:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+body.dark-mode .menu-item.logout:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
 }
 
 .menu-divider {

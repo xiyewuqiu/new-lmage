@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { HiArrowUp } from 'react-icons/hi';
 import './ScrollToTop.css';
 
 /**
@@ -46,7 +47,7 @@ const ScrollToTop = () => {
           whileTap={{ scale: 0.9 }}
           title="返回顶部"
         >
-          <i className="ri-arrow-up-line"></i>
+          <HiArrowUp />
         </motion.button>
       )}
     </AnimatePresence>

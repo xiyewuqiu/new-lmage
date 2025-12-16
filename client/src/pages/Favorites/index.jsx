@@ -5,6 +5,14 @@ import { useImageStore } from '@/store/imageStore';
 import { useFavoriteStore } from '@/store/favoriteStore';
 import { formatFileSize, formatDate } from '@/utils/format';
 import toast from 'react-hot-toast';
+import {
+  HiHeart,
+  HiOutlineHeart,
+  HiOutlineLink,
+  HiOutlineDocument,
+  HiOutlineClock,
+  HiOutlinePhotograph,
+} from 'react-icons/hi';
 import './Favorites.css';
 
 /**
@@ -47,7 +55,7 @@ const FavoritesPage = () => {
       <div className="favorites-header">
         <div className="header-left">
           <h1 className="page-title">
-            <i className="ri-heart-fill"></i>
+            <HiHeart />
             我的收藏
           </h1>
           <p className="page-subtitle">共 {favoriteImages.length} 张收藏图片</p>
@@ -57,11 +65,11 @@ const FavoritesPage = () => {
       {/* 收藏图片网格 */}
       {favoriteImages.length === 0 ? (
         <div className="empty-state">
-          <i className="ri-heart-line"></i>
+          <HiOutlineHeart className="empty-icon" />
           <h3>还没有收藏图片</h3>
           <p>在图片管理中点击爱心图标即可收藏</p>
           <button className="btn btn-primary" onClick={() => navigate('/dashboard')}>
-            <i className="ri-dashboard-line"></i>
+            <HiOutlinePhotograph />
             前往图片管理
           </button>
         </div>
@@ -84,14 +92,14 @@ const FavoritesPage = () => {
                     onClick={() => copyImageUrl(image)}
                     title="复制链接"
                   >
-                    <i className="ri-link"></i>
+                    <HiOutlineLink />
                   </button>
                   <button
                     className="overlay-btn danger"
                     onClick={() => handleUnfavorite(image.id)}
                     title="取消收藏"
                   >
-                    <i className="ri-heart-fill"></i>
+                    <HiHeart />
                   </button>
                 </div>
               </div>
@@ -103,11 +111,11 @@ const FavoritesPage = () => {
                 </p>
                 <div className="image-meta">
                   <span>
-                    <i className="ri-file-line"></i>
+                    <HiOutlineDocument />
                     {formatFileSize(image.fileSize)}
                   </span>
                   <span>
-                    <i className="ri-time-line"></i>
+                    <HiOutlineClock />
                     {formatDate(image.uploadTime)}
                   </span>
                 </div>

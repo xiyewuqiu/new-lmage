@@ -71,8 +71,9 @@
   margin-bottom: 0.5rem;
 }
 
-.form-group label i {
-  font-size: 1.1rem;
+.form-group label svg {
+  width: 1.1rem;
+  height: 1.1rem;
   color: var(--primary-color);
 }
 
@@ -127,8 +128,9 @@
   margin: 0 0 1.5rem 0;
 }
 
-.section-title i {
-  font-size: 1.5rem;
+.section-title svg {
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--primary-color);
 }
 
@@ -163,8 +165,14 @@
   color: var(--success-color);
 }
 
-.status-active i {
-  font-size: 1.2rem;
+.status-active svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.avatar-placeholder svg {
+  width: 3rem;
+  height: 3rem;
 }
 
 /* ========== 按钮加载动画 ========== */
