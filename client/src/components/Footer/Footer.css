@@ -66,8 +66,16 @@ body.dark-mode .footer-link {
   transform: translateY(-2px);
 }
 
-.footer-link i {
-  font-size: 18px;
+.footer-link svg {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.footer-icon-inline {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+  font-size: 14px;
 }
 
 /* 响应式 */

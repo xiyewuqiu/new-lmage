@@ -1,291 +1,338 @@
 /* ========================================
-   底部导航栏 - 现代移动优先设计
+   底部导航栏 - 现代玻璃态设计
    ======================================== */
 
-.sidebar {
+.bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 72px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(40px) saturate(180%);
-  border-top: 1px solid rgba(226, 232, 240, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: var(--z-fixed);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.04);
-  padding: 0 max(env(safe-area-inset-right), 16px) env(safe-area-inset-bottom) max(env(safe-area-inset-left), 16px);
+  padding: 0 16px calc(env(safe-area-inset-bottom, 0px) + 8px) 16px;
 }
 
-body.dark-mode .sidebar {
-  background: rgba(15, 23, 42, 0.95);
-  border-top-color: rgba(51, 65, 85, 0.6);
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5);
+.bottom-nav-container {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  overflow: hidden;
 }
 
-/* 隐藏不需要的元素 */
-.sidebar-header,
-.sidebar-footer,
-.sidebar-toggle {
-  display: none;
+body.dark-mode .bottom-nav-container {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(71, 85, 105, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* 背景光效 */
+.bottom-nav-glow {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 100px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(99, 102, 241, 0.15) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bottom-nav:hover .bottom-nav-glow {
+  opacity: 1;
 }
 
 /* ========================================
-   导航容器
+   导航项容器
    ======================================== */
 
-.sidebar-nav {
-  width: 100%;
-  max-width: 600px;
+.bottom-nav-items {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0;
-  overflow: visible;
-}
-
-.sidebar-menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 8px;
-  width: 100%;
-}
-
-.sidebar-menu-bottom {
-  display: none;
+  padding: 8px 4px;
+  gap: 4px;
 }
 
 /* ========================================
    导航项
    ======================================== */
 
-.sidebar-item {
+.nav-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 16px;
-  color: var(--text-light);
+  color: #64748b;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  white-space: nowrap;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  min-width: 64px;
   cursor: pointer;
+  min-width: 60px;
+  overflow: hidden;
 }
 
-body.dark-mode .sidebar-item {
-  color: var(--dark-text-light);
+body.dark-mode .nav-item {
+  color: #94a3b8;
 }
 
-/* 图标 */
-.sidebar-item i {
-  font-size: 24px;
-  min-width: 24px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 1;
+/* 涟漪效果背景 */
+.nav-item-ripple {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-radius: inherit;
+  transition: background 0.3s ease;
 }
 
-/* 文本 */
-.sidebar-item span {
-  position: relative;
-  z-index: 1;
-  transition: all 0.3s ease;
-  opacity: 0.8;
+.nav-item:hover .nav-item-ripple {
+  background: rgba(99, 102, 241, 0.08);
 }
 
-/* 悬停效果 */
-.sidebar-item:hover {
-  color: var(--primary-color);
-  transform: translateY(-4px);
+body.dark-mode .nav-item:hover .nav-item-ripple {
+  background: rgba(99, 102, 241, 0.15);
 }
 
-body.dark-mode .sidebar-item:hover {
-  color: var(--primary-light);
-}
-
-.sidebar-item:hover i {
-  transform: scale(1.15);
-}
-
-.sidebar-item:hover span {
-  opacity: 1;
-}
-
-/* 激活状态 */
-.sidebar-item.active {
+/* 激活指示器 */
+.nav-item-indicator {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(135deg, 
-    rgba(99, 102, 241, 1), 
-    rgba(139, 92, 246, 1));
-  color: white;
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4),
-              0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  transform: translateY(-8px);
+    rgba(99, 102, 241, 0.15) 0%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  border-radius: inherit;
+  z-index: 0;
 }
 
-.sidebar-item.active::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 4px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.8), 
-    transparent);
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
-}
-
-.sidebar-item.active i {
-  transform: scale(1.1);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.sidebar-item.active span {
-  opacity: 1;
-  font-weight: 700;
-}
-
-.sidebar-item.active:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.5),
-              0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-}
-
-/* 徽章 */
-.sidebar-badge {
-  position: absolute;
-  top: 4px;
-  right: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
-  background: linear-gradient(135deg, #ec4899, #f43f5e);
-  color: white;
-  font-size: 0.625rem;
-  font-weight: 800;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.5);
-  z-index: 2;
-  animation: badgePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes badgePulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.sidebar-item.active .sidebar-badge {
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
+body.dark-mode .nav-item-indicator {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.25) 0%,
+    rgba(139, 92, 246, 0.2) 100%
+  );
 }
 
 /* ========================================
-   桌面端适配 - 保持底部导航
+   图标样式
+   ======================================== */
+
+.nav-item-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.5;
+}
+
+.nav-item:hover .nav-item-icon {
+  color: #6366f1;
+}
+
+body.dark-mode .nav-item:hover .nav-item-icon {
+  color: #818cf8;
+}
+
+/* 激活状态图标 */
+.nav-item.active .nav-item-icon {
+  color: #6366f1;
+}
+
+body.dark-mode .nav-item.active .nav-item-icon {
+  color: #818cf8;
+}
+
+/* ========================================
+   标签样式
+   ======================================== */
+
+.nav-item-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  z-index: 1;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.nav-item:hover .nav-item-label {
+  opacity: 1;
+  color: #6366f1;
+}
+
+body.dark-mode .nav-item:hover .nav-item-label {
+  color: #818cf8;
+}
+
+.nav-item.active .nav-item-label {
+  opacity: 1;
+  color: #6366f1;
+  font-weight: 600;
+}
+
+body.dark-mode .nav-item.active .nav-item-label {
+  color: #818cf8;
+}
+
+/* ========================================
+   徽章样式
+   ======================================== */
+
+.nav-item-badge {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 9px;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.4);
+  animation: badgePop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ========================================
+   响应式设计
    ======================================== */
 
 @media (min-width: 769px) {
-  .sidebar {
-    height: 80px;
-    padding: 0 32px env(safe-area-inset-bottom);
+  .bottom-nav {
+    padding: 0 24px calc(env(safe-area-inset-bottom, 0px) + 12px) 24px;
   }
 
-  .sidebar-nav {
-    max-width: 800px;
+  .bottom-nav-container {
+    max-width: 560px;
+    border-radius: 28px;
   }
 
-  .sidebar-item {
-    padding: 10px 20px;
-    min-width: 80px;
-    font-size: 0.75rem;
+  .bottom-nav-items {
+    padding: 10px 8px;
+    gap: 8px;
   }
 
-  .sidebar-item i {
-    font-size: 26px;
+  .nav-item {
+    padding: 12px 20px;
+    min-width: 72px;
+    border-radius: 18px;
+  }
+
+  .nav-item-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-item-label {
+    font-size: 12px;
   }
 }
 
-/* ========================================
-   移动端优化
-   ======================================== */
-
-@media (max-width: 768px) {
-  .sidebar {
-    height: 68px;
-    padding: 0 8px calc(env(safe-area-inset-bottom) + 4px);
+@media (max-width: 480px) {
+  .bottom-nav {
+    padding: 0 8px calc(env(safe-area-inset-bottom, 0px) + 6px) 8px;
   }
 
-  .sidebar-item {
-    padding: 6px 12px;
-    min-width: 56px;
-    font-size: 0.625rem;
+  .bottom-nav-container {
+    border-radius: 20px;
+  }
+
+  .bottom-nav-items {
+    padding: 6px 2px;
     gap: 2px;
   }
 
-  .sidebar-item i {
-    font-size: 22px;
+  .nav-item {
+    padding: 8px 10px;
+    min-width: 48px;
+    border-radius: 14px;
   }
 
-  .sidebar-item span {
-    font-size: 0.625rem;
+  .nav-item-icon svg {
+    width: 22px;
+    height: 22px;
   }
 
-  .sidebar-badge {
-    top: 2px;
-    right: 4px;
-    min-width: 18px;
-    height: 18px;
-    font-size: 0.5625rem;
+  .nav-item-label {
+    font-size: 10px;
+  }
+
+  .nav-item-badge {
+    min-width: 16px;
+    height: 16px;
+    font-size: 9px;
+    top: -2px;
+    right: -4px;
   }
 }
 
-/* 小屏幕 - 隐藏文字，只显示图标 */
-@media (max-width: 480px) {
-  .sidebar-item span {
+/* 超小屏幕隐藏标签 */
+@media (max-width: 360px) {
+  .nav-item-label {
     display: none;
   }
 
-  .sidebar-item {
-    padding: 8px;
-    min-width: 48px;
-    gap: 0;
-  }
-
-  .sidebar-item.active::before {
-    top: -8px;
-    width: 24px;
-    height: 3px;
+  .nav-item {
+    padding: 10px 8px;
+    min-width: 44px;
   }
 }
 
 /* ========================================
-   隐藏的元素
+   隐藏旧的样式类（兼容性）
    ======================================== */
 
-.sidebar-overlay {
-  display: none;
-}
-
-.sidebar.collapsed {
-  /* 底部导航不需要收起状态 */
+.sidebar,
+.sidebar-nav,
+.sidebar-menu,
+.sidebar-item,
+.sidebar-badge,
+.sidebar-header,
+.sidebar-footer,
+.sidebar-toggle,
+.sidebar-overlay,
+.sidebar-menu-bottom {
+  /* 这些类已废弃，保留以防止样式冲突 */
 }

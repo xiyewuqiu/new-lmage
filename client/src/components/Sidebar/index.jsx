@@ -1,14 +1,25 @@
-import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/authStore';
 import { useImageStore } from '@/store/imageStore';
 import { useFavoriteStore } from '@/store/favoriteStore';
+import { 
+  HiHome, 
+  HiOutlineHome,
+  HiPhotograph,
+  HiOutlinePhotograph,
+  HiStar,
+  HiOutlineStar,
+  HiCog,
+  HiOutlineCog,
+  HiQuestionMarkCircle,
+  HiOutlineQuestionMarkCircle
+} from 'react-icons/hi';
 import './Sidebar.css';
 
 /**
  * 底部导航栏组件
- * 现代移动优先设计
+ * 现代化设计，使用 react-icons
  */
 const Sidebar = () => {
   const location = useLocation();
@@ -20,49 +31,45 @@ const Sidebar = () => {
   const menuItems = [
     {
       path: '/',
-      icon: 'ri-home-5-line',
-      activeIcon: 'ri-home-5-fill',
+      icon: HiOutlineHome,
+      activeIcon: HiHome,
       label: '首页',
       public: true,
     },
     {
       path: '/dashboard',
-      icon: 'ri-image-2-line',
-      activeIcon: 'ri-image-2-fill',
-      label: '图片',
+      icon: HiOutlinePhotograph,
+      activeIcon: HiPhotograph,
+      label: '图库',
       badge: images.length,
       requireAuth: true,
     },
     {
       path: '/favorites',
-      icon: 'ri-star-line',
-      activeIcon: 'ri-star-fill',
+      icon: HiOutlineStar,
+      activeIcon: HiStar,
       label: '收藏',
       badge: favorites.size,
       requireAuth: true,
     },
     {
       path: '/settings',
-      icon: 'ri-settings-3-line',
-      activeIcon: 'ri-settings-3-fill',
+      icon: HiOutlineCog,
+      activeIcon: HiCog,
       label: '设置',
       requireAuth: true,
     },
     {
       path: '/help',
-      icon: 'ri-question-line',
-      activeIcon: 'ri-question-fill',
+      icon: HiOutlineQuestionMarkCircle,
+      activeIcon: HiQuestionMarkCircle,
       label: '帮助',
       public: true,
     },
   ];
 
-  // 检查菜单项是否激活
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const isActive = (path) => location.pathname === path;
 
-  // 过滤菜单项（根据认证状态）
   const filterMenuItems = (items) => {
     return items.filter(
       (item) => item.public || (item.requireAuth && isAuthenticated)
@@ -71,26 +78,56 @@ const Sidebar = () => {
 
   return (
     <motion.nav
-      className="sidebar"
+      className="bottom-nav"
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
     >
-      <div className="sidebar-nav">
-        <div className="sidebar-menu">
+      <div className="bottom-nav-container">
+        {/* 背景光效 */}
+        <div className="bottom-nav-glow" />
+        
+        <div className="bottom-nav-items">
           {filterMenuItems(menuItems).map((item) => {
             const active = isActive(item.path);
+            const Icon = active ? item.activeIcon : item.icon;
+            
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`sidebar-item ${active ? 'active' : ''}`}
+                className={`nav-item ${active ? 'active' : ''}`}
               >
-                <i className={active && item.activeIcon ? item.activeIcon : item.icon}></i>
-                <span>{item.label}</span>
-                {item.badge > 0 && (
-                  <span className="sidebar-badge">{item.badge}</span>
+                {/* 激活指示器 */}
+                {active && (
+                  <motion.div
+                    className="nav-item-indicator"
+                    layoutId="activeIndicator"
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  />
                 )}
+                
+                {/* 图标容器 */}
+                <motion.div 
+                  className="nav-item-icon"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Icon />
+                  
+                  {/* 徽章 */}
+                  {item.badge > 0 && (
+                    <span className="nav-item-badge">
+                      {item.badge > 99 ? '99+' : item.badge}
+                    </span>
+                  )}
+                </motion.div>
+                
+                {/* 标签 */}
+                <span className="nav-item-label">{item.label}</span>
+                
+                {/* 涟漪效果背景 */}
+                <div className="nav-item-ripple" />
               </Link>
             );
           })}

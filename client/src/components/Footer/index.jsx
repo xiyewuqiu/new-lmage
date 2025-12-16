@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FiGithub, FiHelpCircle, FiSend } from 'react-icons/fi';
 import './Footer.css';
 
 /**
@@ -20,6 +21,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
+              <FiSend className="footer-icon-inline" />
               Telegram
             </a>{' '}
             提供技术支持
@@ -29,6 +31,7 @@ const Footer = () => {
         {/* 右侧 - 链接 */}
         <div className="footer-right">
           <Link to="/help" className="footer-link">
+            <FiHelpCircle />
             帮助文档
           </Link>
           <a
@@ -37,7 +40,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="footer-link"
           >
-            <i className="ri-github-line"></i>
+            <FiGithub />
             GitHub
           </a>
         </div>
