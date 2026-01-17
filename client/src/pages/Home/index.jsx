@@ -49,12 +49,12 @@ const HomePage = () => {
 
       if (result.success) {
         setUploadResults(result.data);
-        toast.success(`Done! ${result.summary.success} sketches added.`);
+        toast.success(`搞定！成功添加了 ${result.summary.success} 张涂鸦。`);
       } else {
         toast.error(result.error);
       }
     } catch (error) {
-      toast.error('Something went wrong...');
+      toast.error('出错了，怎么回事？');
     } finally {
       setUploading(false);
     }
@@ -69,7 +69,7 @@ const HomePage = () => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    toast.success('Copied to clipboard!');
+    toast.success('已复制到剪贴板！');
   };
 
   const exportMetadata = () => {
@@ -101,7 +101,7 @@ const HomePage = () => {
   };
 
   const retryFailedImage = (index) => {
-    toast("Manual retry not implemented yet", { icon: '🚧' });
+    toast("手动重试功能还在开发中...", { icon: '🚧' });
   };
 
   const successCount = uploadResults.filter(r => r.success).length;
@@ -109,8 +109,8 @@ const HomePage = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold text-pencil rotate-slight-n1">New Entry</h2>
-        <p className="text-xl text-gray-500 font-hand mt-2 rotate-slight-1">Paste your memories here...</p>
+        <h2 className="text-4xl font-bold text-pencil rotate-slight-n1">新日记</h2>
+        <p className="text-xl text-gray-500 font-hand mt-2 rotate-slight-1">在这里粘贴你的回忆...</p>
       </div>
 
       {/* Upload Zone */}
@@ -125,9 +125,9 @@ const HomePage = () => {
           <input {...getInputProps()} />
           <CloudArrowUp size={64} className={`mx-auto mb-4 ${isDragActive ? 'text-marker-blue' : 'text-gray-400'}`} weight="light" />
           <p className="text-2xl text-pencil font-bold">
-            {isDragActive ? 'Drop it like it\'s hot!' : 'Drag sketches here'}
+            {isDragActive ? '快把照片丢进来！' : '拖拽涂鸦到这里'}
           </p>
-          <p className="text-lg text-gray-400 mt-2">or click to browse</p>
+          <p className="text-lg text-gray-400 mt-2">或者点击选择</p>
         </div>
       )}
 
@@ -135,7 +135,7 @@ const HomePage = () => {
       {uploading && (
         <div className="text-center py-12">
           <div className="text-3xl font-bold text-pencil mb-4 animate-bounce">
-            Drawing... {Math.round(uploadProgress.percent)}%
+            正在绘制中... {Math.round(uploadProgress.percent)}%
           </div>
           <div className="w-full h-4 border-2 border-pencil rounded-full overflow-hidden p-0.5">
             <div 
@@ -152,16 +152,16 @@ const HomePage = () => {
           <div className="flex flex-wrap justify-between items-center mb-6 border-b-2 border-dashed border-gray-200 pb-4">
             <div className="text-2xl font-bold text-pencil">
               <Check size={32} className="inline text-green-500 mr-2" />
-              Success: {successCount}
+              完成: {successCount}
             </div>
             <div className="flex gap-2">
-              <button onClick={exportMetadata} className="btn-doodle text-sm py-1 px-3 flex items-center gap-1" title="Export JSON">
-                <DownloadSimple /> JSON
+              <button onClick={exportMetadata} className="btn-doodle text-sm py-1 px-3 flex items-center gap-1" title="导出 JSON">
+                <DownloadSimple /> 数据
               </button>
-              <button onClick={copyAllUrls} className="btn-doodle text-sm py-1 px-3 flex items-center gap-1" title="Copy Links">
-                <LinkIcon /> Links
+              <button onClick={copyAllUrls} className="btn-doodle text-sm py-1 px-3 flex items-center gap-1" title="复制所有链接">
+                <LinkIcon /> 链接
               </button>
-              <button onClick={copyMarkdownList} className="btn-doodle text-sm py-1 px-3 flex items-center gap-1" title="Copy Markdown">
+              <button onClick={copyMarkdownList} className="btn-doodle text-sm py-1 px-3 flex items-center gap-1" title="复制 Markdown">
                 <FileMd /> MD
               </button>
             </div>
@@ -204,9 +204,9 @@ const HomePage = () => {
                 ) : (
                   <div className="p-4 text-center text-red-500">
                     <X size={32} className="mx-auto mb-2" />
-                    <p>{result.filename} Failed</p>
+                    <p>{result.filename} 失败</p>
                     <p className="text-sm">{result.error}</p>
-                    <button onClick={() => retryFailedImage(index)} className="mt-2 text-pencil underline">Retry</button>
+                    <button onClick={() => retryFailedImage(index)} className="mt-2 text-pencil underline">重试</button>
                   </div>
                 )}
               </div>
@@ -219,7 +219,7 @@ const HomePage = () => {
               onClick={() => { setUploadResults([]); }}
             >
               <CloudArrowUp className="inline mr-2" />
-              Upload More
+              再来一张
             </button>
           </div>
         </div>

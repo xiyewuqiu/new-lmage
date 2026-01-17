@@ -17,11 +17,11 @@ const Sidebar = () => {
   const { favorites } = useFavoriteStore();
 
   const menuItems = [
-    { path: '/', icon: House, label: 'Home', public: true },
-    { path: '/dashboard', icon: ImageIcon, label: 'Gallery', badge: images.length, requireAuth: true },
-    { path: '/favorites', icon: Star, label: 'Stars', badge: favorites.size, requireAuth: true },
-    { path: '/settings', icon: Gear, label: 'Setup', requireAuth: true },
-    { path: '/help', icon: Question, label: 'Help', public: true },
+    { path: '/', icon: House, label: '首页', public: true },
+    { path: '/dashboard', icon: ImageIcon, label: '图库', badge: images.length, requireAuth: true },
+    { path: '/favorites', icon: Star, label: '收藏', badge: favorites.size, requireAuth: true },
+    { path: '/settings', icon: Gear, label: '设置', requireAuth: true },
+    { path: '/help', icon: Question, label: '帮助', public: true },
   ];
 
   const filterMenuItems = (items) => {
@@ -36,9 +36,9 @@ const Sidebar = () => {
       <aside className="hidden md:flex flex-col w-64 h-[calc(100vh-2rem)] sticky top-4 bg-white shadow-sketch rounded-lg rotate-slight-n1 border border-gray-200 z-40">
         <div className="p-6 border-b-2 border-dashed border-gray-200">
           <h1 className="text-3xl font-bold -rotate-2 text-pencil">
-            <span className="bg-marker-yellow px-2 transform inline-block">Doodle</span>
+            <span className="bg-marker-yellow px-2 transform inline-block">涂鸦</span>
             <br />
-            Diary
+            手账
           </h1>
         </div>
 
@@ -72,7 +72,7 @@ const Sidebar = () => {
         </nav>
         
         <div className="p-4 text-center text-gray-400 text-sm border-t-2 border-dashed border-gray-200">
-           ~ Est. 2026 ~
+           ~ 始于 2026 ~
         </div>
       </aside>
 

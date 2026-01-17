@@ -27,7 +27,7 @@ const Header = () => {
     <header className="flex justify-between items-center py-2 px-1 relative z-30">
       {/* Mobile Title */}
       <div className="md:hidden text-2xl font-hand font-bold text-pencil -rotate-2">
-        Doodle
+        涂鸦
       </div>
 
       <div className="flex items-center gap-3 ml-auto">
@@ -36,7 +36,7 @@ const Header = () => {
           onClick={() => navigate('/')}
         >
           <CloudArrowUp size={24} />
-          <span className="hidden sm:inline">Sketch</span>
+          <span className="hidden sm:inline">绘画</span>
         </button>
 
         {isAuthenticated ? (
@@ -64,17 +64,17 @@ const Header = () => {
                    <div className="absolute -top-3 right-8 w-12 h-6 bg-white/40 backdrop-blur-sm rotate-2 shadow-tape"></div>
 
                    <Link to="/dashboard" className="flex items-center gap-2 p-2 hover:bg-marker-yellow/30 rounded font-hand text-lg" onClick={() => setShowUserMenu(false)}>
-                     <ImageIcon size={20} /> My Sketches
+                     <ImageIcon size={20} /> 我的涂鸦
                    </Link>
                    <Link to="/favorites" className="flex items-center gap-2 p-2 hover:bg-marker-pink/30 rounded font-hand text-lg" onClick={() => setShowUserMenu(false)}>
-                     <Star size={20} /> Stars
+                     <Star size={20} /> 收藏
                    </Link>
                    <Link to="/settings" className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded font-hand text-lg" onClick={() => setShowUserMenu(false)}>
-                     <Gear size={20} /> Setup
+                     <Gear size={20} /> 设置
                    </Link>
                    <div className="h-px bg-gray-200 my-1 border-b border-dashed"></div>
                    <button className="w-full flex items-center gap-2 p-2 text-red-500 hover:bg-red-50 rounded font-hand text-lg text-left" onClick={handleLogout}>
-                     <SignOut size={20} /> Leave
+                     <SignOut size={20} /> 离开
                    </button>
                 </div>
               </>
@@ -83,7 +83,7 @@ const Header = () => {
         ) : (
           <Link to="/login" className="btn-secondary flex items-center gap-2 text-pencil">
             <SignIn size={24} />
-            <span>Login</span>
+            <span>登录</span>
           </Link>
         )}
       </div>
