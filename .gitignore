@@ -12,6 +12,10 @@ client/node_modules/
 /dist
 client/dist/
 
+# 构建产物（不提交）
+public/assets/
+public/index.html
+
 # 环境变量
 .env
 .env.local
