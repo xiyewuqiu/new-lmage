@@ -23,10 +23,10 @@ const RegisterPage = () => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.username) return toast.error('Who are you?');
-    if (!formData.email) return toast.error('Need an email!');
-    if (formData.password.length < 6) return toast.error('Password too short!');
-    if (formData.password !== formData.confirmPassword) return toast.error('Passwords don\'t match!');
+    if (!formData.username) return toast.error('你是谁？');
+    if (!formData.email) return toast.error('得留个邮箱！');
+    if (formData.password.length < 6) return toast.error('暗号太短了！');
+    if (formData.password !== formData.confirmPassword) return toast.error('两次暗号对不上！');
 
     setLoading(true);
 
@@ -38,13 +38,13 @@ const RegisterPage = () => {
       });
 
       if (result.success) {
-        toast.success('Sketchbook created! Welcome!');
+        toast.success('手账本已备好！欢迎！');
         navigate('/dashboard');
       } else {
         toast.error(result.error);
       }
     } catch (error) {
-      toast.error('Could not create account...');
+      toast.error('没法创建账号...');
     } finally {
       setLoading(false);
     }
@@ -55,12 +55,12 @@ const RegisterPage = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1">
           <label className="block text-xl font-hand font-bold text-pencil ml-1 rotate-slight-n1">
-            Pick a Name
+            起个名字
           </label>
           <input
             type="text"
             name="username"
-            placeholder="Artist Name"
+            placeholder="艺术家大名"
             className="input-hand"
             value={formData.username}
             onChange={handleChange}
@@ -70,7 +70,7 @@ const RegisterPage = () => {
 
         <div className="space-y-1">
           <label className="block text-xl font-hand font-bold text-pencil ml-1 rotate-slight-1">
-            Email
+            邮箱
           </label>
           <input
             type="email"
@@ -85,12 +85,12 @@ const RegisterPage = () => {
 
         <div className="space-y-1">
           <label className="block text-xl font-hand font-bold text-pencil ml-1 rotate-slight-n1">
-            Secret Code
+            秘密暗号
           </label>
           <input
             type="password"
             name="password"
-            placeholder="Min 6 chars"
+            placeholder="至少6个字"
             className="input-hand"
             value={formData.password}
             onChange={handleChange}
@@ -100,12 +100,12 @@ const RegisterPage = () => {
 
         <div className="space-y-1">
           <label className="block text-xl font-hand font-bold text-pencil ml-1 rotate-slight-1">
-            Repeat Code
+            重复暗号
           </label>
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Just to be sure"
+            placeholder="确认一下"
             className="input-hand"
             value={formData.confirmPassword}
             onChange={handleChange}
@@ -118,13 +118,13 @@ const RegisterPage = () => {
           className="btn-primary w-full mt-8 text-2xl font-bold py-3 rotate-slight-n1 disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? 'Binding Book...' : 'Create Sketchbook'}
+          {loading ? '正在装订...' : '创建手账本'}
         </button>
       </form>
 
       <div className="mt-8 text-center">
         <p className="font-hand text-lg text-gray-500">
-          Already have one? <Link to="/login" className="text-marker-blue underline decoration-wavy font-bold hover:text-blue-500">Open it</Link>
+          已经有手账了？ <Link to="/login" className="text-marker-blue underline decoration-wavy font-bold hover:text-blue-500">打开它</Link>
         </p>
       </div>
     </div>

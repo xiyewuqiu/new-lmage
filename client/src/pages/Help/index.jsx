@@ -15,24 +15,24 @@ import {
 const HelpPage = () => {
   const faqs = [
     {
-      question: 'How do I sketch?',
-      answer: 'Drag & drop, click to browse, or paste (Ctrl+V). Easy peasy.',
+      question: '我要怎么涂鸦？',
+      answer: '拖拽图片，点击选择，或者直接粘贴 (Ctrl+V)。小菜一碟。',
     },
     {
-      question: 'What kind of paper?',
-      answer: 'PNG, JPG, JPEG, GIF, WebP, SVG. Standard stuff.',
+      question: '支持什么纸张格式？',
+      answer: 'PNG, JPG, JPEG, GIF, WebP, SVG。标准格式都行。',
     },
     {
-      question: 'How big?',
-      answer: 'Max 10MB per sketch. Keep it light.',
+      question: '能画多大？',
+      answer: '每张最大 10MB。保持轻盈。',
     },
     {
-      question: 'Is it permanent?',
-      answer: 'Yes, stored safely via Telegram APIs. It won\'t fade.',
+      question: '是永久的吗？',
+      answer: '是的，通过 Telegram API 安全存储。永不褪色。',
     },
     {
-      question: 'How to organize?',
-      answer: 'Use the Gallery to view, Stars to favorite, and Tags to categorize.',
+      question: '怎么整理？',
+      answer: '用图库查看，用星星收藏，用标签分类。',
     },
   ];
 
@@ -49,10 +49,10 @@ const HelpPage = () => {
       <div className="text-center mb-12">
         <h1 className="text-5xl font-hand font-bold text-pencil rotate-slight-1">
           <Lifebuoy className="inline mr-2 text-marker-blue" />
-          Help & Guide
+          帮助指南
         </h1>
         <p className="text-xl text-gray-400 font-hand mt-2 rotate-slight-n1">
-          How to use this sketchbook
+          如何使用这本手账
         </p>
       </div>
 
@@ -60,16 +60,16 @@ const HelpPage = () => {
       <div className="bg-white p-6 shadow-sketch border border-gray-200 rotate-slight-n1 mb-12 relative rounded-sm">
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-white/40 backdrop-blur-sm -rotate-1 shadow-tape"></div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-           <FeatureCard Icon={CloudArrowUp} title="Quick Draw" desc="Drag, drop, paste." />
-           <FeatureCard Icon={Tag} title="Label It" desc="Tags & favorites." />
-           <FeatureCard Icon={ShieldCheck} title="Safe" desc="Secure storage." />
+           <FeatureCard Icon={CloudArrowUp} title="快速涂鸦" desc="拖拽，放下，粘贴。" />
+           <FeatureCard Icon={Tag} title="贴标签" desc="标签和收藏。" />
+           <FeatureCard Icon={ShieldCheck} title="安全" desc="安全存储。" />
         </div>
       </div>
 
       {/* FAQ Scraps */}
       <div className="mb-12">
          <h2 className="text-3xl font-hand font-bold text-pencil mb-8 text-center border-b-2 border-marker-pink inline-block px-4 mx-auto rotate-1">
-           <Question className="inline mr-2" /> Frequently Asked
+           <Question className="inline mr-2" /> 常问问题
          </h2>
          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {faqs.map((faq, idx) => (
@@ -90,9 +90,9 @@ const HelpPage = () => {
          <div className="absolute top-2 right-2 w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center border border-dashed border-gray-300">
             <Lifebuoy size={24} className="text-gray-400" />
          </div>
-         <h3 className="font-hand font-bold text-2xl text-pencil mb-4">Still stuck?</h3>
+         <h3 className="font-hand font-bold text-2xl text-pencil mb-4">还是搞不懂？</h3>
          <p className="font-hand text-gray-600 mb-6">
-           If you can't find your answer, drop a note in the suggestion box.
+           如果找不到答案，往建议箱里投个条子。
          </p>
          <div className="flex gap-4">
             <a 
@@ -107,7 +107,7 @@ const HelpPage = () => {
               href="mailto:support@tg-image.com" 
               className="flex-1 btn-primary text-center flex items-center justify-center gap-2"
             >
-              <Envelope size={20} /> Email
+              <Envelope size={20} /> 邮件
             </a>
          </div>
       </div>

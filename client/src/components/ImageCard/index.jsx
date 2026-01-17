@@ -60,7 +60,7 @@ const ImageCard = ({
              <button
                className="bg-white p-2 rounded-full shadow-lg hover:bg-marker-yellow transition-transform hover:rotate-12 hover:scale-110"
                onClick={(e) => { e.stopPropagation(); onCopy(image); }}
-               title="Copy Link"
+               title="复制链接"
              >
                <Copy size={20} className="text-pencil" />
              </button>
@@ -69,7 +69,7 @@ const ImageCard = ({
              <button
                className="bg-white p-2 rounded-full shadow-lg hover:bg-marker-pink transition-transform hover:-rotate-12 hover:scale-110"
                onClick={(e) => { e.stopPropagation(); onFavorite(image.id); }}
-               title="Love it"
+               title="喜欢"
              >
                <Heart size={20} weight={isFavorite ? "fill" : "regular"} className={isFavorite ? "text-red-500" : "text-pencil"} />
              </button>
@@ -78,7 +78,7 @@ const ImageCard = ({
              <button
                className="bg-white p-2 rounded-full shadow-lg hover:bg-red-100 transition-transform hover:rotate-6 hover:scale-110"
                onClick={(e) => { e.stopPropagation(); onDelete(image); }}
-               title="Throw away"
+               title="丢弃"
              >
                <Trash size={20} className="text-red-500" />
              </button>

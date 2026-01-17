@@ -24,12 +24,12 @@ const FavoritesPage = () => {
 
   const copyImageUrl = (image) => {
     navigator.clipboard.writeText(window.location.origin + image.src);
-    toast.success('Copied!');
+    toast.success('已复制！');
   };
 
   const handleUnfavorite = (imageId) => {
     toggleFavorite(imageId);
-    toast('Removed from stars', { icon: '💔' });
+    toast('已取消星标', { icon: '💔' });
   };
 
   return (
@@ -37,10 +37,10 @@ const FavoritesPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-end mb-8 border-b-2 border-dashed border-gray-200 pb-4">
         <div>
           <h1 className="text-4xl font-hand font-bold text-pencil rotate-slight-1">
-            <Star weight="fill" className="inline text-marker-yellow mb-2" /> Starred Pages
+            <Star weight="fill" className="inline text-marker-yellow mb-2" /> 星标页面
           </h1>
           <p className="text-gray-400 font-hand mt-1 rotate-slight-n1">
-            {favoriteImages.length} special memories
+            {favoriteImages.length} 个珍藏回忆
           </p>
         </div>
       </div>
@@ -48,11 +48,11 @@ const FavoritesPage = () => {
       {favoriteImages.length === 0 ? (
         <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50/50">
           <Star size={64} className="mx-auto text-gray-300 mb-4" />
-          <h3 className="text-2xl font-hand text-gray-500">No stars yet!</h3>
-          <p className="font-hand text-gray-400 mb-6">Go find some sketches to love.</p>
+          <h3 className="text-2xl font-hand text-gray-500">还没有星星！</h3>
+          <p className="font-hand text-gray-400 mb-6">去发现一些你喜欢的涂鸦吧。</p>
           <button onClick={() => navigate('/dashboard')} className="btn-secondary rotate-slight-1">
             <ImageIcon className="inline mr-2" />
-            Go to Gallery
+            前往图库
           </button>
         </div>
       ) : (

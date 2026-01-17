@@ -29,22 +29,22 @@ const SettingsPage = () => {
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
-    if (!passwordData.currentPassword) return toast.error('Current password needed!');
-    if (passwordData.newPassword.length < 6) return toast.error('New password too short!');
-    if (passwordData.newPassword !== passwordData.confirmPassword) return toast.error('Passwords mismatch!');
+    if (!passwordData.currentPassword) return toast.error('需要当前暗号！');
+    if (passwordData.newPassword.length < 6) return toast.error('新暗号太短了！');
+    if (passwordData.newPassword !== passwordData.confirmPassword) return toast.error('两次暗号不一致！');
 
     setIsChangingPassword(true);
     try {
       const result = await changePassword(passwordData.currentPassword, passwordData.newPassword);
       if (result.success) {
-        toast.success('Secret code changed!');
+        toast.success('暗号已修改！');
         setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
         setShowPasswordSection(false);
       } else {
         toast.error(result.error);
       }
     } catch (error) {
-      toast.error('Failed to change...');
+      toast.error('修改失败...');
     } finally {
       setIsChangingPassword(false);
     }
@@ -52,13 +52,13 @@ const SettingsPage = () => {
 
   const handleSettingChange = (key, value) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
-    toast.success('Checkbox marked!');
+    toast.success('已勾选！');
   };
 
   const handleDeleteAccount = () => {
-    if (window.confirm('Tear out all pages and burn the book? (Delete Account)')) {
-      if (window.confirm('Really? There is no going back.')) {
-        toast.error('Cannot burn the book yet (Feature disabled)');
+    if (window.confirm('撕掉所有纸页并烧毁日记本？(注销账号)')) {
+      if (window.confirm('真的吗？没法反悔的。')) {
+        toast.error('还不能烧书 (功能未开放)');
       }
     }
   };
@@ -80,10 +80,10 @@ const SettingsPage = () => {
       <div className="mb-8">
         <h1 className="text-4xl font-hand font-bold text-pencil rotate-slight-n1">
           <Gear className="inline mr-2 animate-spin-slow" /> 
-          Preferences
+          偏好设置
         </h1>
         <p className="text-gray-400 font-hand mt-1 rotate-slight-1">
-          Tweaking the system...
+          调整系统...
         </p>
       </div>
 
@@ -95,18 +95,18 @@ const SettingsPage = () => {
             {/* Notifications */}
             <section>
               <h2 className="text-2xl font-hand font-bold text-pencil mb-4 border-b-2 border-marker-yellow inline-block pr-4 rotate-slight-n1">
-                <Bell className="inline mr-1" /> Notifications
+                <Bell className="inline mr-1" /> 通知消息
               </h2>
               <div className="space-y-1">
                 <ToggleItem 
-                  label="Email Updates" 
-                  description="Get letters via owl (email)" 
+                  label="邮件更新" 
+                  description="接收猫头鹰信件 (邮件)" 
                   checked={settings.emailNotifications} 
                   onChange={(v) => handleSettingChange('emailNotifications', v)} 
                 />
                 <ToggleItem 
-                  label="Upload Alerts" 
-                  description="Ding when sketch is done" 
+                  label="上传提醒" 
+                  description="搞定的时候叮一下" 
                   checked={settings.uploadNotifications} 
                   onChange={(v) => handleSettingChange('uploadNotifications', v)} 
                 />
@@ -116,18 +116,18 @@ const SettingsPage = () => {
             {/* Uploads */}
             <section>
               <h2 className="text-2xl font-hand font-bold text-pencil mb-4 border-b-2 border-marker-blue inline-block pr-4 rotate-slight-1">
-                <CloudArrowUp className="inline mr-1" /> Sketching
+                <CloudArrowUp className="inline mr-1" /> 涂鸦设置
               </h2>
               <div className="space-y-1">
                 <ToggleItem 
-                  label="Auto-Save" 
-                  description="Keep sketches in gallery automatically" 
+                  label="自动保存" 
+                  description="自动把涂鸦存进图库" 
                   checked={settings.autoSave} 
                   onChange={(v) => handleSettingChange('autoSave', v)} 
                 />
                 <ToggleItem 
-                  label="Squish Images" 
-                  description="Compress to save paper space" 
+                  label="压缩图片" 
+                  description="压扁一点好省纸" 
                   checked={settings.compressImages} 
                   onChange={(v) => handleSettingChange('compressImages', v)} 
                 />
@@ -135,14 +135,14 @@ const SettingsPage = () => {
                 <div className="flex items-center gap-3 py-3 border-b border-dashed border-gray-200">
                    <div className="mt-1"><Square size={24} className="opacity-0" /></div>
                    <div className="flex-1">
-                     <h4 className="font-hand text-xl font-bold text-pencil">Privacy Default</h4>
+                     <h4 className="font-hand text-xl font-bold text-pencil">默认隐私</h4>
                      <select 
                        className="mt-1 bg-transparent border-b-2 border-dashed border-gray-300 font-hand text-lg focus:border-pencil outline-none w-full max-w-xs"
                        value={settings.defaultPrivacy}
                        onChange={(e) => handleSettingChange('defaultPrivacy', e.target.value)}
                      >
-                       <option value="public">Public (Show everyone)</option>
-                       <option value="private">Private (Diary only)</option>
+                       <option value="public">公开 (给所有人看)</option>
+                       <option value="private">私密 (只有我看)</option>
                      </select>
                    </div>
                 </div>
@@ -152,7 +152,7 @@ const SettingsPage = () => {
             {/* Security */}
             <section>
               <h2 className="text-2xl font-hand font-bold text-pencil mb-4 border-b-2 border-marker-pink inline-block pr-4 rotate-slight-n1">
-                <ShieldCheck className="inline mr-1" /> Security
+                <ShieldCheck className="inline mr-1" /> 安全防卫
               </h2>
               
               {!showPasswordSection ? (
@@ -160,7 +160,7 @@ const SettingsPage = () => {
                   onClick={() => setShowPasswordSection(true)}
                   className="btn-doodle w-full text-left flex justify-between items-center"
                 >
-                  <span>Change Secret Code</span>
+                  <span>修改暗号</span>
                   <LockKey />
                 </button>
               ) : (
@@ -170,13 +170,13 @@ const SettingsPage = () => {
                      onClick={() => setShowPasswordSection(false)}
                      className="absolute top-2 right-2 text-gray-400 hover:text-pencil"
                    >
-                     Cancel
+                     取消
                    </button>
                    <div className="space-y-3">
                      <input 
                        type="password" 
                        name="currentPassword" 
-                       placeholder="Old Code" 
+                       placeholder="旧暗号" 
                        className="input-hand bg-white"
                        value={passwordData.currentPassword}
                        onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
@@ -184,7 +184,7 @@ const SettingsPage = () => {
                      <input 
                        type="password" 
                        name="newPassword" 
-                       placeholder="New Code" 
+                       placeholder="新暗号" 
                        className="input-hand bg-white"
                        value={passwordData.newPassword}
                        onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
@@ -192,13 +192,13 @@ const SettingsPage = () => {
                      <input 
                        type="password" 
                        name="confirmPassword" 
-                       placeholder="Repeat New Code" 
+                       placeholder="确认新暗号" 
                        className="input-hand bg-white"
                        value={passwordData.confirmPassword}
                        onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
                      />
                      <button type="submit" disabled={isChangingPassword} className="btn-primary w-full mt-2">
-                       {isChangingPassword ? 'Updating...' : 'Update Code'}
+                       {isChangingPassword ? '正在更新...' : '更新暗号'}
                      </button>
                    </div>
                 </form>
@@ -212,7 +212,7 @@ const SettingsPage = () => {
                  className="w-full border-2 border-dashed border-red-200 text-red-400 font-hand text-xl py-2 hover:bg-red-50 hover:text-red-500 hover:border-red-400 transition-all rotate-slight-1"
                >
                  <Warning className="inline mb-1 mr-2" />
-                 Burn this Diary (Delete Account)
+                 焚烧日记本 (注销账号)
                </button>
             </section>
          </div>

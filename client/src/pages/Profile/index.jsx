@@ -32,19 +32,19 @@ const ProfilePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username) return toast.error('Name required!');
+    if (!formData.username) return toast.error('名字不能为空！');
 
     setIsSubmitting(true);
     try {
       const result = await updateProfile(formData);
       if (result.success) {
-        toast.success('ID Card Updated!');
+        toast.success('证件已更新！');
         setIsEditing(false);
       } else {
         toast.error(result.error);
       }
     } catch (error) {
-      toast.error('Update failed...');
+      toast.error('更新失败...');
     } finally {
       setIsSubmitting(false);
     }
@@ -66,10 +66,10 @@ const ProfilePage = () => {
       <div className="mb-8">
         <h1 className="text-4xl font-hand font-bold text-pencil rotate-slight-1">
           <IdentificationCard className="inline mr-2" weight="duotone" /> 
-          Identity Card
+          身份证明
         </h1>
         <p className="text-gray-400 font-hand mt-1 rotate-slight-n1">
-          This certifies that...
+          兹证明...
         </p>
       </div>
 
@@ -87,7 +87,7 @@ const ProfilePage = () => {
                    <User size={64} className="text-gray-300" weight="thin" />
                  )}
               </div>
-              <p className="font-hand text-sm text-gray-400 mt-2">PHOTO</p>
+              <p className="font-hand text-sm text-gray-400 mt-2">照片</p>
             </div>
 
             {/* Form Area */}
@@ -95,7 +95,7 @@ const ProfilePage = () => {
                <form onSubmit={handleSubmit} className="space-y-6">
                  <div>
                    <label className="flex items-center gap-2 font-hand text-lg text-pencil mb-1">
-                     <User /> Name / Alias
+                     <User /> 姓名 / 代号
                    </label>
                    {isEditing ? (
                      <input
@@ -114,7 +114,7 @@ const ProfilePage = () => {
 
                  <div>
                    <label className="flex items-center gap-2 font-hand text-lg text-pencil mb-1">
-                     <Envelope /> Contact
+                     <Envelope /> 联系方式
                    </label>
                    {isEditing ? (
                      <input
@@ -133,7 +133,7 @@ const ProfilePage = () => {
 
                  <div>
                    <label className="flex items-center gap-2 font-hand text-lg text-pencil mb-1">
-                     <Article /> Bio
+                     <Article /> 个人简介
                    </label>
                    {isEditing ? (
                      <textarea
@@ -145,7 +145,7 @@ const ProfilePage = () => {
                      />
                    ) : (
                      <div className="text-lg font-hand border-b-2 border-transparent px-2 py-1 italic text-gray-600">
-                       {formData.bio || "No description provided."}
+                       {formData.bio || "这家伙很懒，什么都没写。"}
                      </div>
                    )}
                  </div>
@@ -154,15 +154,15 @@ const ProfilePage = () => {
                    {isEditing ? (
                      <>
                        <button type="button" onClick={handleCancel} className="btn-doodle text-sm px-4 py-1">
-                         <X className="inline mr-1" /> Cancel
+                         <X className="inline mr-1" /> 取消
                        </button>
                        <button type="submit" disabled={isSubmitting} className="btn-primary text-sm px-4 py-1">
-                         <Check className="inline mr-1" /> Save
+                         <Check className="inline mr-1" /> 保存
                        </button>
                      </>
                    ) : (
                      <button type="button" onClick={() => setIsEditing(true)} className="btn-doodle text-sm px-4 py-1">
-                       <PencilSimple className="inline mr-1" /> Edit Card
+                       <PencilSimple className="inline mr-1" /> 修改证件
                      </button>
                    )}
                  </div>
@@ -173,10 +173,10 @@ const ProfilePage = () => {
 
       <div className="mt-8 flex justify-between text-gray-400 font-hand text-sm px-4">
         <div className="flex items-center gap-1">
-           <CalendarCheck /> Joined: {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Unknown'}
+           <CalendarCheck /> 加入时间: {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : '未知'}
         </div>
         <div className="flex items-center gap-1">
-           <Fingerprint /> ID: {user?.id?.substring(0, 8)}...
+           <Fingerprint /> 编号: {user?.id?.substring(0, 8)}...
         </div>
       </div>
 

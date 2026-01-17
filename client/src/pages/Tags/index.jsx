@@ -26,11 +26,11 @@ const TagsPage = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    if (!tagName.trim()) return toast.error('Tag needs a name!');
+    if (!tagName.trim()) return toast.error('标签得有个名字！');
 
     const result = await createTag({ name: tagName, color: tagColor });
     if (result.success) {
-      toast.success('Sticky note added!');
+      toast.success('便利贴贴好了！');
       setShowCreateModal(false);
       setTagName('');
       setTagColor('#fef08a');
@@ -48,11 +48,11 @@ const TagsPage = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    if (!tagName.trim()) return toast.error('Tag needs a name!');
+    if (!tagName.trim()) return toast.error('标签得有个名字！');
 
     const result = await updateTag(editingTag.id, { name: tagName, color: tagColor });
     if (result.success) {
-      toast.success('Note rewritten!');
+      toast.success('便利贴改好了！');
       setShowEditModal(false);
       setEditingTag(null);
       setTagName('');
@@ -62,10 +62,10 @@ const TagsPage = () => {
   };
 
   const handleDelete = async (tagId) => {
-    if (window.confirm('Crumple up this note and throw it away?')) {
+    if (window.confirm('把这张便利贴揉成团扔掉？')) {
       const result = await deleteTag(tagId);
       if (result.success) {
-        toast.success('Note trashed.');
+        toast.success('便利贴已扔进垃圾桶。');
       } else {
         toast.error(result.error);
       }
@@ -84,18 +84,18 @@ const TagsPage = () => {
          
          <form onSubmit={onSubmit} className="space-y-4">
            <div>
-             <label className="block font-hand text-lg text-gray-500 mb-1">Label</label>
+             <label className="block font-hand text-lg text-gray-500 mb-1">标签名</label>
              <input
                type="text"
                className="input-hand w-full text-xl"
                value={tagName}
                onChange={(e) => setTagName(e.target.value)}
-               placeholder="Important Stuff"
+               placeholder="重要的事情"
                autoFocus
              />
            </div>
            <div>
-             <label className="block font-hand text-lg text-gray-500 mb-1">Color Marker</label>
+             <label className="block font-hand text-lg text-gray-500 mb-1">记号笔颜色</label>
              <div className="flex gap-2 flex-wrap">
                {['#fef08a', '#fbcfe8', '#bae6fd', '#bbf7d0', '#e9d5ff'].map(color => (
                  <button
@@ -120,10 +120,10 @@ const TagsPage = () => {
            
            <div className="flex justify-end gap-3 pt-4 border-t-2 border-dashed border-gray-100 mt-6">
              <button type="button" onClick={onClose} className="btn-doodle text-sm px-4">
-               Cancel
+               取消
              </button>
              <button type="submit" className="btn-primary text-sm px-4">
-               Save Note
+               保存
              </button>
            </div>
          </form>
@@ -136,23 +136,23 @@ const TagsPage = () => {
       <div className="flex justify-between items-end mb-8 border-b-2 border-dashed border-gray-200 pb-4">
         <div>
           <h1 className="text-4xl font-hand font-bold text-pencil rotate-slight-1">
-            <Tag className="inline mr-2" weight="duotone" /> Tags
+            <Tag className="inline mr-2" weight="duotone" /> 标签
           </h1>
           <p className="text-gray-400 font-hand mt-1 rotate-slight-n1">
-            Sticky notes for your brain
+            给脑子的便利贴
           </p>
         </div>
         <button onClick={() => setShowCreateModal(true)} className="btn-primary flex items-center gap-1 rotate-1">
-          <Plus size={20} weight="bold" /> New Note
+          <Plus size={20} weight="bold" /> 新便利贴
         </button>
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center py-20 font-hand text-xl text-pencil animate-bounce">Checking corkboard...</div>
+        <div className="flex justify-center py-20 font-hand text-xl text-pencil animate-bounce">正在检查软木板...</div>
       ) : tags.length === 0 ? (
         <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50/50">
            <Tag size={64} className="mx-auto text-gray-300 mb-4" />
-           <p className="font-hand text-xl text-gray-400">No sticky notes found.</p>
+           <p className="font-hand text-xl text-gray-400">没找到便利贴。</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
@@ -169,14 +169,14 @@ const TagsPage = () => {
               
               <div className="mt-4 flex-1 flex flex-col items-center justify-center text-center">
                  <h3 className="font-hand text-2xl font-bold text-pencil break-words w-full">{tag.name}</h3>
-                 <p className="font-hand text-sm text-pencil/60 mt-1">{tag.count || 0} sketches</p>
+                 <p className="font-hand text-sm text-pencil/60 mt-1">{tag.count || 0} 张涂鸦</p>
               </div>
 
               <div className="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button onClick={() => handleEdit(tag)} className="p-2 hover:bg-white/50 rounded-full text-pencil" title="Rewrite">
+                <button onClick={() => handleEdit(tag)} className="p-2 hover:bg-white/50 rounded-full text-pencil" title="重写">
                   <Pencil size={20} />
                 </button>
-                <button onClick={() => handleDelete(tag.id)} className="p-2 hover:bg-white/50 rounded-full text-red-500" title="Trash">
+                <button onClick={() => handleDelete(tag.id)} className="p-2 hover:bg-white/50 rounded-full text-red-500" title="丢弃">
                   <Trash size={20} />
                 </button>
               </div>
@@ -187,7 +187,7 @@ const TagsPage = () => {
 
       {showCreateModal && (
         <TagModal 
-          title="New Sticky Note" 
+          title="新便利贴" 
           onSubmit={handleCreate} 
           onClose={() => setShowCreateModal(false)} 
         />
@@ -195,7 +195,7 @@ const TagsPage = () => {
 
       {showEditModal && (
         <TagModal 
-          title="Rewrite Note" 
+          title="重写便利贴" 
           onSubmit={handleUpdate} 
           onClose={() => setShowEditModal(false)} 
         />

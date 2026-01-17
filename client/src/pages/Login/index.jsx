@@ -12,7 +12,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.username || !formData.password) {
-      toast.error('Please fill in your secret code!');
+      toast.error('请填上你的秘密代号！');
       return;
     }
 
@@ -20,13 +20,13 @@ const LoginPage = () => {
     try {
       const result = await login(formData);
       if (result.success) {
-        toast.success('Welcome back!');
+        toast.success('欢迎回来！');
         navigate('/dashboard');
       } else {
         toast.error(result.error);
       }
     } catch (error) {
-      toast.error('Login failed...');
+      toast.error('登录失败...');
     } finally {
       setLoading(false);
     }
@@ -37,12 +37,12 @@ const LoginPage = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <label className="block text-xl font-hand font-bold text-pencil ml-1 rotate-slight-n1">
-            Who are you?
+            你是谁？
           </label>
           <input
             type="text"
             name="username"
-            placeholder="Username or Email"
+            placeholder="名字或邮箱"
             className="input-hand"
             value={formData.username}
             onChange={(e) => setFormData({...formData, username: e.target.value})}
@@ -52,12 +52,12 @@ const LoginPage = () => {
 
         <div className="space-y-2">
           <label className="block text-xl font-hand font-bold text-pencil ml-1 rotate-slight-1">
-            Secret Password
+            秘密口令
           </label>
           <input
             type="password"
             name="password"
-            placeholder="Shhh..."
+            placeholder="嘘..."
             className="input-hand"
             value={formData.password}
             onChange={(e) => setFormData({...formData, password: e.target.value})}
@@ -70,13 +70,13 @@ const LoginPage = () => {
           className="btn-primary w-full mt-8 text-2xl font-bold py-3 rotate-slight-n1 disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? 'Opening...' : 'Open Diary'}
+          {loading ? '正在翻开...' : '打开日记'}
         </button>
       </form>
 
       <div className="mt-8 text-center">
         <p className="font-hand text-lg text-gray-500">
-          First time here? <Link to="/register" className="text-marker-blue underline decoration-wavy font-bold hover:text-blue-500">Get a Sketchbook</Link>
+          第一次来？ <Link to="/register" className="text-marker-blue underline decoration-wavy font-bold hover:text-blue-500">领一本手账</Link>
         </p>
       </div>
     </div>

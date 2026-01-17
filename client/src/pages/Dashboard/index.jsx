@@ -54,7 +54,7 @@ const DashboardPage = () => {
     if (!imageToDelete) return;
     const result = await deleteImage(imageToDelete.id);
     if (result.success) {
-      toast.success('Sketch erased!');
+      toast.success('涂鸦已擦除！');
       setShowDeleteModal(false);
       setImageToDelete(null);
     } else {
@@ -64,10 +64,10 @@ const DashboardPage = () => {
 
   const handleBatchDelete = async () => {
     if (selectedImages.size === 0) return;
-    if (window.confirm(`Erase ${selectedImages.size} sketches?`)) {
+    if (window.confirm(`确定要擦除这 ${selectedImages.size} 张涂鸦吗？`)) {
       const result = await deleteImages(Array.from(selectedImages));
       if (result.success) {
-        toast.success(`Erased ${selectedImages.size} sketches.`);
+        toast.success(`已擦除 ${selectedImages.size} 张涂鸦。`);
       } else {
         toast.error(result.error);
       }
@@ -76,7 +76,7 @@ const DashboardPage = () => {
 
   const copyImageUrl = (image) => {
     navigator.clipboard.writeText(window.location.origin + image.src);
-    toast.success('Link copied to clipboard!');
+    toast.success('链接已复制！');
   };
 
   const isFavorite = (imageId) => favorites.has(imageId);
@@ -87,10 +87,10 @@ const DashboardPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-end mb-8 border-b-2 border-dashed border-gray-200 pb-4">
         <div>
           <h1 className="text-4xl font-hand font-bold text-pencil rotate-slight-n1">
-            My Sketches
+            我的涂鸦
           </h1>
           <p className="text-gray-400 font-hand mt-1">
-            {images.length} memories collected
+            收集了 {images.length} 个美好瞬间
           </p>
         </div>
 
@@ -98,7 +98,7 @@ const DashboardPage = () => {
           {isSelectionMode ? (
              <div className="flex gap-2 bg-yellow-50 p-2 rounded-lg border border-marker-yellow rotate-1">
                 <button onClick={toggleSelectAll} className="btn-doodle text-sm py-1 px-2">
-                   All
+                   全选
                 </button>
                 <button onClick={handleBatchDelete} className="btn-doodle text-sm py-1 px-2 text-red-500 hover:bg-red-50">
                    <Trash size={18} />
@@ -112,14 +112,14 @@ const DashboardPage = () => {
                <button 
                  onClick={toggleSelectionMode} 
                  className="btn-doodle flex items-center gap-1 text-sm py-1 px-3"
-                 title="Select Multiple"
+                 title="批量选择"
                >
-                 <CheckCircle size={20} /> Select
+                 <CheckCircle size={20} /> 选择
                </button>
                <button 
                  onClick={() => setSortBy(filters.sortBy === 'newest' ? 'oldest' : 'newest')} 
                  className="btn-doodle flex items-center gap-1 text-sm py-1 px-3"
-                 title="Sort"
+                 title="排序"
                >
                  {filters.sortBy === 'newest' ? <SortDescending size={20} /> : <SortAscending size={20} />}
                </button>
@@ -145,15 +145,15 @@ const DashboardPage = () => {
       {/* Content */}
       {isLoading ? (
         <div className="flex justify-center py-20">
-          <div className="animate-bounce text-2xl font-hand text-pencil">Loading sketches...</div>
+          <div className="animate-bounce text-2xl font-hand text-pencil">正在翻阅手账...</div>
         </div>
       ) : images.length === 0 ? (
         <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50/50">
           <ImageIcon size={64} className="mx-auto text-gray-300 mb-4" />
-          <h3 className="text-2xl font-hand text-gray-500">Page is empty!</h3>
+          <h3 className="text-2xl font-hand text-gray-500">这里空空如也！</h3>
           <button onClick={() => navigate('/')} className="btn-primary mt-6 rotate-slight-n1">
             <CloudArrowUp className="inline mr-2" />
-            Start Drawing
+            开始记录
           </button>
         </div>
       ) : (
@@ -194,11 +194,11 @@ const DashboardPage = () => {
         <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowDeleteModal(false)}>
           <div className="bg-white p-8 max-w-sm w-full shadow-sketch rotate-slight-1 relative" onClick={e => e.stopPropagation()}>
              <div className="tape-top"></div>
-             <h3 className="text-2xl font-hand font-bold text-red-500 mb-4 text-center">Tear this page?</h3>
-             <p className="text-center font-hand text-gray-500 mb-6">You can't tape it back together.</p>
+             <h3 className="text-2xl font-hand font-bold text-red-500 mb-4 text-center">撕掉这一页？</h3>
+             <p className="text-center font-hand text-gray-500 mb-6">撕了可就粘不回去了。</p>
              <div className="flex gap-4 justify-center">
-                <button onClick={() => setShowDeleteModal(false)} className="btn-doodle">Keep it</button>
-                <button onClick={confirmDelete} className="btn-doodle bg-red-100 hover:bg-red-200 text-red-600 border-red-200">Yes, Erase</button>
+                <button onClick={() => setShowDeleteModal(false)} className="btn-doodle">留着吧</button>
+                <button onClick={confirmDelete} className="btn-doodle bg-red-100 hover:bg-red-200 text-red-600 border-red-200">是的，擦掉它</button>
              </div>
           </div>
         </div>
