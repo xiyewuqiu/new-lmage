@@ -15,13 +15,14 @@ export async function fileHandler(c) {
     const referer = c.req.header('Referer') || '';
 
     // 判断是否为浏览器直接访问：
-    // 1. Accept头包含text/html
-    // 2. 没有referer或referer不是图片嵌入
-    // 3. 不是下载请求和原图请求
+    // 1. Accept头包含text/html（浏览器地址栏访问）
+    // 2. 不是下载请求和原图请求
+    // 3. 没有 referer 或 referer 是同域名（排除 <img> 标签嵌入）
+    const currentHost = new URL(c.req.url).host;
+    const refererHost = referer ? new URL(referer).host : '';
     const isBrowserDirectAccess = !isDownload && !isRaw &&
                                   accept.includes('text/html') &&
-                                  !accept.includes('image/') &&
-                                  (!referer || !referer.includes('image'));
+                                  (!referer || refererHost !== currentHost);
 
     try {
         let fileUrl = null;
