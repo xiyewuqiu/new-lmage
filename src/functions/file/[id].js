@@ -6,8 +6,8 @@ export async function fileHandler(c) {
     // 检查是否为下载请求
     const isDownload = url.searchParams.get('download') === 'true';
 
-    // 检查是否为预览请求
-    const isPreview = url.searchParams.get('preview') === 'true';
+    // 检查是否为原图请求（直接嵌入）
+    const isRaw = url.searchParams.get('raw') === 'true';
 
     // 检查是否为浏览器直接访问（而非嵌入、API调用等）
     const userAgent = c.req.header('User-Agent') || '';
@@ -17,8 +17,8 @@ export async function fileHandler(c) {
     // 判断是否为浏览器直接访问：
     // 1. Accept头包含text/html
     // 2. 没有referer或referer不是图片嵌入
-    // 3. 不是下载请求
-    const isBrowserDirectAccess = !isDownload &&
+    // 3. 不是下载请求和原图请求
+    const isBrowserDirectAccess = !isDownload && !isRaw &&
                                   accept.includes('text/html') &&
                                   !accept.includes('image/') &&
                                   (!referer || !referer.includes('image'));
@@ -41,12 +41,12 @@ export async function fileHandler(c) {
 
         // 如果找到文件URL
         if (fileUrl) {
-            // 如果是预览请求，返回预览页面
-            if (isPreview) {
+            // 如果是浏览器直接访问，返回预览页面
+            if (isBrowserDirectAccess) {
                 return createPreviewPage(c, id, fileUrl);
             }
 
-            // 否则返回原图文件（包括下载和直接访问）
+            // 否则返回原图文件（包括下载、原图请求、图片嵌入等）
             return await proxyFile(c, fileUrl);
         }
 
@@ -106,6 +106,7 @@ function createPreviewPage(c, id, imageUrl) {
     const currentUrl = new URL(c.req.url);
     const baseUrl = `${currentUrl.protocol}//${currentUrl.host}`;
     const downloadUrl = `${baseUrl}/file/${id}?download=true`;
+    const rawUrl = `${baseUrl}/file/${id}?raw=true`;
 
     const html = `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -620,6 +621,9 @@ function createPreviewPage(c, id, imageUrl) {
         <button class="control-btn" id="infoBtn" onclick="toggleInfo()" title="显示/隐藏信息 (I)">
             <i class="ri-information-line"></i>
         </button>
+        <button class="control-btn" id="copyBtn" onclick="copyLink()" title="复制链接 (C)">
+            <i class="ri-link"></i>
+        </button>
         <button class="control-btn" id="fullscreenBtn" onclick="toggleFullscreen()" title="全屏查看 (F)">
             <i class="ri-fullscreen-line"></i>
         </button>
@@ -630,15 +634,16 @@ function createPreviewPage(c, id, imageUrl) {
 
     <!-- 快捷键提示 -->
     <div class="hotkeys" id="hotkeys">
-        <kbd>F</kbd> 全屏 <kbd>I</kbd> 信息 <kbd>D</kbd> 下载 <kbd>ESC</kbd> 关闭
+        <kbd>F</kbd> 全屏 <kbd>I</kbd> 信息 <kbd>C</kbd> 复制 <kbd>D</kbd> 下载 <kbd>ESC</kbd> 关闭
     </div>
 
     <!-- 成功提示 -->
     <div class="toast" id="toast"></div>
 
     <script>
-        const imageUrl = '${imageUrl}';
+        const imageUrl = '${rawUrl}'; // 使用原图链接
         const downloadUrl = '${downloadUrl}';
+        const shareUrl = '${baseUrl}/file/${id}'; // 分享链接（预览页面）
         const previewImage = document.getElementById('previewImage');
         const previewVideo = document.getElementById('previewVideo');
         const previewContainer = document.getElementById('previewContainer');
@@ -660,6 +665,15 @@ function createPreviewPage(c, id, imageUrl) {
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 2000);
+        }
+
+        // 复制链接
+        function copyLink() {
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                showToast('链接已复制到剪贴板');
+            }).catch(() => {
+                showToast('复制失败，请手动复制');
+            });
         }
 
         // 检测文件类型并加载相应元素
@@ -852,6 +866,10 @@ function createPreviewPage(c, id, imageUrl) {
                 case 'i':
                     e.preventDefault();
                     toggleInfo();
+                    break;
+                case 'c':
+                    e.preventDefault();
+                    copyLink();
                     break;
             }
         });
